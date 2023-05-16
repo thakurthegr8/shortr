@@ -1,27 +1,97 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --color-primary: #f63232;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  font-family: "Inter", sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply bg-gray-50;
+}
+
+/* buttons */
+
+button {
+  @apply relative overflow-hidden rounded-lg font-normal text-sm disabled:bg-gray-200 disabled:border-gray-300 disabled:text-gray-400  py-1 px-2 flex justify-center items-center active:scale-95 transition-all tracking-wide disabled:hover:bg-gray-200 disabled:active:scale-100;
+}
+
+.btn-sm {
+  @apply text-sm;
+}
+
+.btn-lg {
+  @apply text-lg;
+}
+/* filled */
+.btn-primary {
+  @apply bg-primary border border-primary active:bg-primary/75 hover:bg-primary/75 text-white;
+}
+.btn-secondary {
+  @apply bg-secondary border border-secondary active:bg-secondary/75 hover:bg-secondary/75 text-general;
+}
+.btn-general {
+  @apply bg-general border border-general active:bg-general/75 hover:bg-general/75 text-white;
+}
+
+/* outlined */
+.btn-text {
+  @apply bg-transparent;
+}
+.btn-text-primary {
+  @apply btn-text active:bg-primary/75 hover:bg-primary hover:text-white text-primary;
+}
+.btn-text-secondary {
+  @apply btn-text active:bg-secondary/75 hover:bg-secondary hover:text-general text-secondary;
+}
+.btn-text-general {
+  @apply btn-text active:bg-general/75 hover:bg-general hover:text-white text-general;
+}
+
+/* outlined */
+.btn-outlined {
+  @apply bg-transparent border;
+}
+.btn-outlined-primary {
+  @apply btn-outlined border-primary active:bg-primary/75 hover:bg-primary active:text-white hover:text-white text-primary;
+}
+.btn-outlined-secondary {
+  @apply btn-outlined border-secondary active:bg-secondary/75 hover:bg-secondary active:text-general hover:text-general text-secondary;
+}
+.btn-outlined-general {
+  @apply btn-outlined border-general active:bg-general/75 hover:bg-general active:text-white hover:text-white text-general;
+}
+
+/* Icon */
+
+.btn-icon {
+  @apply rounded-full text-black bg-transparent p-3 hover:bg-primary/20 active:bg-primary/50;
+}
+
+/* typography */
+h1 {
+  @apply text-3xl tracking-tight;
+}
+h2 {
+  @apply text-2xl tracking-tight;
+}
+
+h3 {
+  @apply text-xl tracking-tight;
+}
+
+p {
+  @apply text-base tracking-tight;
+}
+
+span {
+  @apply text-sm tracking-tight;
+}
+
+input,textarea,select {
+  @apply bg-gray-100 outline-none p-3 rounded-lg border border-gray-300 focus:border-general transition-all font-semibold  text-sm;
 }
