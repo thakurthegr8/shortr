@@ -1,3 +1,4 @@
+import Navbar from "@/src/components/sections/Navbar";
 import Button from "@/src/components/utils/Button";
 import Form from "@/src/components/utils/Form";
 import Layout from "@/src/components/utils/Layout";
@@ -21,6 +22,9 @@ const Login = () => {
 
   return (
     <Layout>
+      <Layout.Container className="max-w-5xl">
+        <Navbar />
+      </Layout.Container>
       <Layout.Container className="max-w-sm h-full">
         <Layout.Col className="gap-2 pt-16">
           <Typography.Heading className="font-bold">

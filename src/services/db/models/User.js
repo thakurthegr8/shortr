@@ -59,6 +59,6 @@ UserSchema.pre("findOneAndUpdate", async function (next) {
   }
 });
 
-const User = mongoose.models.cgptuser || model("cgptuser", UserSchema);
+const User = mongoose.models.linkifyuser || model("linkifyuser", UserSchema);
 
 export default User;

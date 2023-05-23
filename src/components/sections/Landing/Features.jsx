@@ -4,45 +4,47 @@ import React from "react";
 
 const featureElements = [
   {
-    heading: "🖌️ Endless Possibilities",
-    description:
-      "Whether you need captivating visuals for your website, eye-catching social media posts, or stunning graphics for your presentations, our platform has got you covered.",
+    name: "Customizable Profile",
+    emoji:"🎨",
+    description: "Create personalized profiles with your own picture, background image, and bio."
   },
   {
-    heading: "⚡ Instant Results",
-    description:
-      "Gone are the days of waiting for designers or sifting through stock photo libraries. Our powerful algorithms generate high-quality, custom images in seconds, tailored to your unique needs and preferences.",
+    name: "Multiple Links",
+    emoji:"🔗",
+    description: "Organize and display multiple links to your social media profiles, websites, and more."
   },
   {
-    heading: "🔍 Simple and Intuitive",
-    description:
-      "No design experience? No problem! Our user-friendly interface makes it effortless to create professional-looking visuals. Simply enter your prompt, choose from various styles and options, and watch as your vision comes to life.",
+    name: "Link Grouping",
+    emoji:"📂",
+    description: "Group your links into categories or sections for easier navigation and organization."
   },
   {
-    heading: "💡 Inspiration at Your Fingertips",
-    description:
-      "Stuck on ideas? Browse through our vast collection of pre-generated images to spark your creativity. Discover new concepts, experiment with different styles, and find the perfect image to match your vision.",
+    name: "Analytics and Insights",
+    emoji:"📊",
+    description: "Track link clicks, visitor demographics, and other metrics to measure link performance."
   },
   {
-    heading: "📈 Boost Engagement",
-    description:
-      "Stand out from the crowd with visually stunning content that grabs attention and leaves a lasting impression. Whether you're a marketer, blogger, or business owner, our image generation platform will help you create engaging visuals that drive results.",
+    name: " Custom URLs",
+    emoji:"🌐",
+    description: "Customize your link tree URL to match your brand or personal identity."
   },
   {
-    heading: "✅ Seamless Integration",
-    description:
-      "Easily incorporate the images you generate into your existing workflow. Our platform provides flexible export options, allowing you to download your creations in various formats, including PNG, JPEG, and SVG.",
+    name: " Social Media Integration",
+    emoji:"📱",
+    description: "Import and display your social media profiles and content within your link tree."
   },
 ];
+
 
 const Features = () => {
   return (
     <Layout>
-        <Layout.Grid className="grid-cols-1 md:grid-cols-2 gap-2 pt-8">
+        <Layout.Grid className="grid-cols-1 md:grid-cols-2 gap-8 py-8">
           {featureElements.map((item, index) => (
             <Layout.Card key={index}>
+              <Typography.Title className="lg:text-7xl">{item.emoji}</Typography.Title>
               <Typography.Subtitle className="font-bold">
-                {item.heading}
+                {item.name}
               </Typography.Subtitle>
               <Typography.Body>
                 {item.description}

@@ -1,32 +1,55 @@
 import Features from "@/src/components/sections/Landing/Features";
 import Navbar from "@/src/components/sections/Navbar";
 import Button from "@/src/components/utils/Button";
+import Form from "@/src/components/utils/Form";
+import Input from "@/src/components/utils/Form/Input";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
+import { useMemo } from "react";
 
-const heading =
-  "🎨🌟 Unleash Your Creativity: Instantly Generate Amazing Images on Demand! 🖼️✨";
+const headings = [
+  "🚀 Unlock Your Digital Universe: Explore, Discover, Connect! ✨",
+  "🌐 Your Online Hub Awaits: Simplify, Share, and Stand Out! 🌟",
+  "🔗 All Your Links in One Place: Link Up and Level Up! 🚀",
+  "🌈 Navigate Your Digital World: Connect, Share, and Inspire! ✨",
+  "⭐ Empower Your Online Presence: Unleash Your Potential! 🚀",
+  "🌟 Link Up for Success: Amplify Your Reach and Influence! ✨",
+  "💫 Your Gateway to Online Excellence: Connect, Share, and Thrive! 🚀",
+  "🔥 Ignite Your Online Impact: Unleash Your Brilliance! ✨",
+  "🌺 Blossom Online: Connect, Share, and Flourish! 🌟",
+  "🚀 Elevate Your Online Game: Connect, Share, and Soar! ✨",
+];
 const subheading =
-  "Canvas-GPT allows you to generate images with a prompt powered by DALL-E";
-const getStartedButtonText = "Get Started";
+  "🌟 Link Up for Success: Amplify Your Reach and Influence! ✨";
+const ctaBtn = "Claim your linkify";
+const domain = "linkify.rtdevopsify.com/";
 
 export default function Home() {
+  const index = useMemo(() => Math.floor(Math.random() * headings.length), []);
   return (
     <Layout>
       <Layout.Container className="max-w-5xl">
-      <Navbar />
+        <Navbar />
         <Layout.Col className="gap-4 py-24">
           <Typography.Title className="text-center font-black lg:text-5xl">
-            {heading}
+            {headings[index]}
           </Typography.Title>
           <Typography.Subtitle className="text-center">
             {subheading}
           </Typography.Subtitle>
-          <Layout.Row className="justify-center items-center">
-            <Button className="btn-general scale-125 font-bold">
-              {getStartedButtonText}
-            </Button>
-          </Layout.Row>
+          <Form onSubmit={()=>null}>
+            <Layout.Col className="justify-center gap-2 md:flex-row">
+              <Layout.Row className="items-center gap-2">
+                <Typography.Heading className="text-slate-400 text-sm md:text-lg font-semibold">
+                  {domain}
+                </Typography.Heading>
+                <Input placeholder="@Username" className="flex-1"/>
+              </Layout.Row>
+              <Button className="btn-general btn-lg font-bold">
+                {ctaBtn}
+              </Button>
+            </Layout.Col>
+          </Form>
         </Layout.Col>
         <Features />
       </Layout.Container>

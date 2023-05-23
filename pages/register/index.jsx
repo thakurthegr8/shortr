@@ -1,3 +1,5 @@
+import Logo from "@/src/components/elements/Logo";
+import Navbar from "@/src/components/sections/Navbar";
 import Button from "@/src/components/utils/Button";
 import Form from "@/src/components/utils/Form";
 import Layout from "@/src/components/utils/Layout";
@@ -16,10 +18,10 @@ const fields = [
   },
 ];
 
+const heading = "Register";
+const registerBtnText = "Register";
+const loginBtnText = "Already a User? Login";
 const Register = () => {
-  const heading = "Register";
-  const registerBtnText = "Register";
-  const loginBtnText = "Already a User? Login";
   const [state, setState] = useState(null);
 
   const onFormSubmit = (e) => {
@@ -28,6 +30,9 @@ const Register = () => {
 
   return (
     <Layout>
+      <Layout.Container className="max-w-5xl">
+        <Navbar />
+      </Layout.Container>
       <Layout.Container className="max-w-sm h-full">
         <Layout.Col className="gap-2 pt-16">
           <Typography.Heading className="font-bold">
@@ -44,7 +49,9 @@ const Register = () => {
             <Button className="btn-general">{registerBtnText}</Button>
           </Form>
           <Link href="/login" className="w-full">
-          <Button className="btn-secondary font-bold tracking-tight w-full">{loginBtnText}</Button>
+            <Button className="btn-secondary font-bold tracking-tight w-full">
+              {loginBtnText}
+            </Button>
           </Link>
         </Layout.Col>
       </Layout.Container>
