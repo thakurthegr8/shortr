@@ -37,17 +37,10 @@ export default function Home() {
           <Typography.Subtitle className="text-center">
             {subheading}
           </Typography.Subtitle>
-          <Form onSubmit={()=>null}>
+          <Form onSubmit={() => null}>
             <Layout.Col className="justify-center gap-2 md:flex-row">
-              <Layout.Row className="items-center gap-2">
-                <Typography.Heading className="text-slate-400 text-sm md:text-lg font-semibold">
-                  {domain}
-                </Typography.Heading>
-                <Input placeholder="@Username" className="flex-1"/>
-              </Layout.Row>
-              <Button className="btn-general btn-lg font-bold">
-                {ctaBtn}
-              </Button>
+              <Input placeholder={`${domain}@Username`}/>
+              <Button className="btn-general btn-lg font-bold">{ctaBtn}</Button>
             </Layout.Col>
           </Form>
         </Layout.Col>
