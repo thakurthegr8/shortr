@@ -3,6 +3,8 @@ import Button from "@/src/components/utils/Button";
 import Form from "@/src/components/utils/Form";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
+import useLogin from "@/src/hooks/auth/useLogin";
+import { useAuth } from "@/src/providers/Auth";
 import React, { useState } from "react";
 
 const fields = [
@@ -14,10 +16,9 @@ const Login = () => {
   const heading = "Login to continue";
   const loginBtnText = "Login";
   const registerBtnText = "New User? Register"
-  const [state, setState] = useState(null);
-
-  const onFormSubmit = (e) => {
-    e.preventDefault();
+  const authContext = useAuth();
+  const onFormSubmit = async (data) => {
+    await authContext.loginWithEmailAndPassword(data);
   };
 
   return (

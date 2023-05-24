@@ -60,7 +60,7 @@ button {
   @apply btn-outlined border-primary active:bg-primary/75 hover:bg-primary active:text-white hover:text-white text-primary;
 }
 .btn-outlined-secondary {
-  @apply btn-outlined border-secondary active:bg-secondary/75 hover:bg-secondary active:text-general hover:text-general text-secondary;
+  @apply btn-outlined border-secondary active:bg-secondary/75 hover:bg-secondary active:text-general hover:text-general text-general;
 }
 .btn-outlined-general {
   @apply btn-outlined border-general active:bg-general/75 hover:bg-general active:text-white hover:text-white text-general;
@@ -94,4 +94,10 @@ span {
 
 input,textarea,select {
   @apply bg-gray-100 outline-none p-3 rounded-lg border border-gray-300 focus:border-general transition-all font-semibold  text-sm;
+}
+
+/* toast */
+
+.Toastify__toast{
+  @apply text-sm p-1 capitalize;
 }

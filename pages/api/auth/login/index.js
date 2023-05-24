@@ -1,8 +1,8 @@
+import db from "@/src/services/db";
 import jwt from "jsonwebtoken";
+import User from "@/src/services/db/models/User";
 import moment from "moment";
 import bcrypt from "bcrypt";
-import db from "@/src/services/db";
-import User from "@/src/services/db/models/User";
 
 export default db(async function (req, res) {
   if (req.method !== "POST") return res.status(405).send("method not allowed");
@@ -10,6 +10,10 @@ export default db(async function (req, res) {
   try {
     const getUser = await User.findOne({ email });
     if (!getUser) throw new Error("user does not exists");
+    // if (!getUser.verified) throw new Error("user is not verified");
+    // const otp = generateOTP();
+    // const initiateOTP = await setOTP(email, otp);
+    console.log(password, getUser.password);
     const verifyPassword = await bcrypt.compareSync(password, getUser.password);
     if (!verifyPassword) throw new Error("invalid password");
     const token = jwt.sign({ data: getUser }, process.env.JWT_SECRET);
