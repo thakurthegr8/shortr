@@ -9,7 +9,7 @@ const db = (handler) => {
     if (mongoose.connections[0].readyState) {
       return handler(req, res);
     }
-    await mongoose.connect(remoteConnectionString, {
+    await mongoose.connect(localConnectionString, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
@@ -17,3 +17,17 @@ const db = (handler) => {
   };
 };
 export default db;
+
+
+export const dbPage = (handler) => {
+  return async (ctx) => {
+    if (mongoose.connections[0].readyState) {
+      return handler(ctx);
+    }
+    await mongoose.connect(localConnectionString, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    });
+    return handler(ctx);
+  };
+};

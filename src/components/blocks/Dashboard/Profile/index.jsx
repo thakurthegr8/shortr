@@ -2,10 +2,28 @@ import Button from "@/src/components/utils/Button";
 import Form from "@/src/components/utils/Form";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
+import useFetch from "@/src/hooks/general/useFetch";
+import { useProfile } from "@/src/providers/Profile";
+import { profilePayloadValidator } from "@/src/utils/schemaValidators/profilePayload";
 import Image from "next/image";
 import React from "react";
+import { toast } from "react-toastify";
 
 const DashboardLandingPageProfile = () => {
+  const profile = useProfile();
+  const postProfile = useFetch({
+    method: profile.data?.username ? "PUT" : "POST",
+    url: "/api/profile",
+  });
+  const onSubmit = async (formData) => {
+    try {
+      await profilePayloadValidator(formData);
+      postProfile.dispatch(formData);
+    } catch (error) {
+      toast("error", { type: "error" });
+      console.log(error);
+    }
+  };
   return (
     <Layout>
       <Layout.Container>
@@ -26,14 +44,25 @@ const DashboardLandingPageProfile = () => {
                   <Button className="btn-general btn-lg tracking-tight w-full py-3 font-semibold rounded-full">
                     Add New Image
                   </Button>
-                  <Button className="btn-outlined-secondary  btn-lg tracking-tight w-full py-3 rounded-full">
+                  <Button className="btn-outlined-secondary btn-lg tracking-tight w-full py-3 rounded-full">
                     Remove
                   </Button>
                 </Layout.Col>
               </Layout.Row>
-              <Form className="flex flex-col gap-2">
-                <Form.Input name="username" placeholder="Enter your username..."/>
-                <Form.Input name="bio" placeholder="Enter your bio..."/>
+              <Form className="flex flex-col gap-2" onSubmit={onSubmit}>
+                <Form.Input
+                  name="username"
+                  placeholder="Enter your username..."
+                  defaultValue={profile?.data?.username}
+                />
+                <Form.Input
+                  name="bio"
+                  placeholder="Enter your bio..."
+                  defaultValue={profile?.data?.bio}
+                />
+                <Layout.Row className="justify-end">
+                  <Button className="btn-primary btn-lg">Submit</Button>
+                </Layout.Row>
               </Form>
             </Layout.Col>
           </Layout.Card>

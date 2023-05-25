@@ -21,7 +21,6 @@ export const Avatar = (props) => {
 const AccountAvatar = () => {
   const auth = useAuth();
   const name = auth?.data?.name;
-  console.log("account avatar",auth);
   if (!auth.data) return null;
   return (
     <>

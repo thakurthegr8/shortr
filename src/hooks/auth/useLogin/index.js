@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { loginWithEmailAndPasswordPayloadValidator } from "@/src/utils/schemaValidators/loginPayload";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import useFetch from "../../general/useFetch";
 
 const useLogin = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
+  const init = useFetch({method:"GET", url:"/api/auth"})
 
   const loginWithEmailAndPassword = async (payload) => {
     try {
@@ -29,6 +31,12 @@ const useLogin = () => {
       setLoading(false);
     }
   };
+
+  useEffect(()=>{
+    if(init.data){
+      setData(init.data);
+    }
+  },[init.data])
   return {
     data,
     loading,
