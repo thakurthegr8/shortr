@@ -11,20 +11,23 @@ import React, { useMemo, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { imageLoader } from "@/src/utils/image";
+import { useProfile } from "@/src/providers/Profile";
+import { useLink } from "@/src/providers/Links";
 
-const LinkInput = ({ type, placeholder }) => {
+const LinkInput = ({ type, placeholder, ...restProps }) => {
   const [disabled, toggle] = useState(true);
   const toggleInput = () => {
     toggle((prev) => !prev);
   };
   return (
-    <Layout>
+    <Layout.Row>
       <Form.Input
         type={type}
         placeholder={placeholder}
         name="title"
-        className="text-sm border-none p-2 bg-transparent"
+        className="text-sm border-none p-2 bg-transparent flex-1 text-ellipsis"
         disabled={disabled}
+        {...restProps}
       />
       <Button className="btn-icon" onClick={toggleInput}>
         {disabled ? (
@@ -33,11 +36,12 @@ const LinkInput = ({ type, placeholder }) => {
           <CheckIcon className="w-5 h-5" />
         )}
       </Button>
-    </Layout>
+    </Layout.Row>
   );
 };
 
 const AddLinkCard = (props) => {
+  const link = useLink();
   const [formState, setFormState] = useState({ title: "", value: "" });
   const [metaData, setMetaData] = useState(null);
   const enableSubmitBtn = useMemo(() => {
@@ -52,7 +56,9 @@ const AddLinkCard = (props) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const onFormSubmit = async (data) => {};
+  const onFormSubmit = async (data) => {
+    await link.addLink.dispatch(data);
+  };
   const readyToSubmit = useMemo(async () => {
     try {
       const res = await axios.post("/api/scraper", { url: formState.value });
@@ -63,13 +69,12 @@ const AddLinkCard = (props) => {
       setMetaData({ success: false, payload: error });
       return false;
     }
-    setMetaData({ success: false, payload: null });
-    return false;
   }, [formState.value]);
   return (
     <Layout.Card className="border-yellow-400">
       <Layout.Col className="gap-4">
-        <Layout.Row>
+        <Layout.Row className="items-center justify-between">
+          <Typography.Subtitle className="font-semibold">Add Link</Typography.Subtitle>
           <Button className="btn-icon" onClick={props.close}>
             <CloseIcon className="w-6 h-6" />
           </Button>
@@ -99,7 +104,7 @@ const AddLinkCard = (props) => {
             <Layout.Row>
               <Button
                 className="btn-general btn-lg font-semibold"
-                disabled={!enableSubmitBtn}
+                disabled={!enableSubmitBtn || link.addLink.loading}
               >
                 Submit
               </Button>
@@ -115,25 +120,27 @@ const LinkCard = (props) => {
   return (
     <Layout.Card>
       <Layout.Col>
-        <Layout.Col className="sm:flex-row">
-          <Form className="flex-1">
+        <Layout.Col>
+          <Form>
             <Layout.Col className="items-stretch">
-              <Layout.Row>
-                <LinkInput placeholder="Enter title..." type="title" />
-              </Layout.Row>
-              <Layout.Row>
-                <LinkInput placeholder="Enter url..." type="url" />
-              </Layout.Row>
+              <LinkInput
+                placeholder="Enter title..."
+                type="title"
+                defaultValue={props?.title}
+              />
+              <LinkInput
+                placeholder="Enter url..."
+                type="url"
+                defaultValue={props?.value}
+              />
             </Layout.Col>
           </Form>
-          <Layout.Row className="items-center">
-            <Button className="btn-icon">
-              <ArrowUpOnSquareIcon className="w-5 h-5" />
-            </Button>
-            <Button>Enable</Button>
-          </Layout.Row>
         </Layout.Col>
         <Layout.Row className="justify-end">
+          <Button className="btn-icon">
+            <ArrowUpOnSquareIcon className="w-5 h-5" />
+          </Button>
+          <Button>Enable</Button>
           <Button className="btn-icon">
             <TrashIcon className="w-5 h-5" />
           </Button>
@@ -144,10 +151,12 @@ const LinkCard = (props) => {
 };
 
 const DashboardLandingPageLinks = () => {
+  const link = useLink();
   const [addLinkCard, enableAddLinkCard] = useState(false);
   const toggleCard = () => {
     enableAddLinkCard((prev) => !prev);
   };
+  console.log(link);
   return (
     <Layout>
       <Layout.Container>
@@ -162,8 +171,11 @@ const DashboardLandingPageLinks = () => {
             Add Link +
           </Button>
           {addLinkCard && <AddLinkCard close={toggleCard} />}
-          <Layout.Col >
-            <LinkCard />
+          <Layout.Col className="gap-4">
+            {link?.data &&
+              link.data.map((item, index) => (
+                <LinkCard key={index} {...item} />
+              ))}
           </Layout.Col>
         </Layout.Col>
       </Layout.Container>

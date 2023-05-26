@@ -1,7 +1,7 @@
 import React from "react";
 
 const DashboardLandingPageDesign = () => {
-  return <div>index</div>;
+  return <div></div>;
 };
 
 export default DashboardLandingPageDesign;

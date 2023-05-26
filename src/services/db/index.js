@@ -9,7 +9,7 @@ const db = (handler) => {
     if (mongoose.connections[0].readyState) {
       return handler(req, res);
     }
-    await mongoose.connect(localConnectionString, {
+    await mongoose.connect(remoteConnectionString, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });

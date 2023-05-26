@@ -69,7 +69,7 @@ button {
 /* Icon */
 
 .btn-icon {
-  @apply rounded-full text-black bg-transparent p-3 hover:bg-primary/20 active:bg-primary/50;
+  @apply rounded-full text-black bg-transparent p-2 hover:bg-gray-200 active:bg-gray-300;
 }
 
 /* typography */

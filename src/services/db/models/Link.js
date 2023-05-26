@@ -5,16 +5,18 @@ const LinkSchema = new Schema(
     link_for: {
       type: Schema.Types.ObjectId,
       required: true,
+      ref:"linkifyuser"
     },
     title:{
       type:Schema.Types.String,
+      required:true
     },
     enabled:{
       type:Schema.Types.Boolean,
       default:true
     },
     value: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.String,
       required: true,
     },
   },

@@ -77,7 +77,7 @@ const DashboardLandingPageProfile = () => {
                     height={128}
                     width={128}
                     loader={imageLoader}
-                    className="rounded-full"
+                    className="rounded-full object-contain aspect-1/1 overflow-hidden"
                   />
                 ) : (
                   <UserIcon className="w-20 h-20 bg-secondary text-gray-600 aspect-1/1 rounded-full p-2" />
