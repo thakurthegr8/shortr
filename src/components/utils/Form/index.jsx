@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "./Input";
+import FileComponent from "./File";
 
 const Form = (props) => {
   const onSubmit = (e) => {
@@ -16,6 +17,7 @@ const Form = (props) => {
 };
 
 Form.Input = Input;
+Form.File = FileComponent;
 
 Form.defaultProps = {
   onSubmit: (data) => console.log(data),

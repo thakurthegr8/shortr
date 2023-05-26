@@ -1,5 +1,15 @@
 import mongoose, { model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
+
+const ProfileImageSchema = new Schema(
+  {
+    public_id: { type: Schema.Types.String, required: true },
+    signature: { type: Schema.Types.String, required: true },
+    url: { type: Schema.Types.String, required: true },
+  },
+  { timestamps: true }
+);
+
 const UserSchema = new Schema(
   {
     name: {
@@ -16,7 +26,7 @@ const UserSchema = new Schema(
       required: true,
     },
     image: {
-      type: Schema.Types.String,
+      type: ProfileImageSchema,
       default: null,
     },
     verified: {

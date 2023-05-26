@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/src/providers/Auth";
 import Layout from "../../utils/Layout";
+import { imageLoader } from "@/src/utils/image";
 
 export const Avatar = (props) => {
   const initial = props.name
@@ -26,13 +27,13 @@ const AccountAvatar = () => {
     <>
       <Menu className="relative z-10" as="div">
         <Menu.Button>
-        {auth.data?.image !== null ? <Image src={auth.user.image} width={50} height={50} loader={imageLoader} className="bg-general rounded-full aspect-square"/>:<Avatar name={name} />}
+        {auth.data?.image ? <Image src={auth.data.image.url}  width={50} height={50} loader={imageLoader} className="bg-general rounded-full aspect-square object-cover"/>:<Avatar name={name} />}
         </Menu.Button>
         <Menu.Items className="absolute w-72 right-0 bg-white border rounded-xl shadow-md flex-col overflow-hidden">
           <Menu.Item>
             <Link href="/me">
               <Layout.Row className="p-2 gap-2 items-center border-b">
-                {auth.data?.image !== null ? <Image src={auth.user.image} width={50} height={50} loader={imageLoader} className="bg-general rounded-full aspect-square object-cover object-center"/>:<Avatar name={name} />}
+                {auth.data?.image ? <Image src={auth.data.image.url} width={50} height={50} loader={imageLoader} className="bg-general rounded-full aspect-square object-cover object-cover"/>:<Avatar name={name} />}
                 <Typography.Heading className="font-bold">
                   {name}
                 </Typography.Heading>

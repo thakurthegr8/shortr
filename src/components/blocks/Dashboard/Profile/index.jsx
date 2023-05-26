@@ -3,18 +3,27 @@ import Form from "@/src/components/utils/Form";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
 import useFetch from "@/src/hooks/general/useFetch";
+import useImage from "@/src/hooks/general/useImage";
+import { useAuth } from "@/src/providers/Auth";
 import { useProfile } from "@/src/providers/Profile";
+import { imageLoader } from "@/src/utils/image";
+import { FILE_UPLOAD_LIMIT } from "@/src/utils/limiters";
 import { profilePayloadValidator } from "@/src/utils/schemaValidators/profilePayload";
+import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import { toast } from "react-toastify";
 
 const DashboardLandingPageProfile = () => {
   const profile = useProfile();
+  const auth = useAuth();
+  const image = useImage();
   const postProfile = useFetch({
     method: profile.data?.username ? "PUT" : "POST",
     url: "/api/profile",
   });
+  const fileRef = useRef(null);
+
   const onSubmit = async (formData) => {
     try {
       await profilePayloadValidator(formData);
@@ -23,6 +32,34 @@ const DashboardLandingPageProfile = () => {
       toast("error", { type: "error" });
       console.log(error);
     }
+  };
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    console.log(file);
+    const sizeInMb = file.size / (1024 * 1024);
+    if (sizeInMb > FILE_UPLOAD_LIMIT) {
+      toast(`please upload file with size lesser than ${FILE_UPLOAD_LIMIT}MB`, {
+        type: "error",
+      });
+      return;
+    }
+    try {
+      const imageRes = await image.uploadImage(file);
+      await auth.updateProfileImage.dispatch({
+        image: {
+          url: imageRes.secure_url,
+          public_id: imageRes.public_id,
+          signature: imageRes.signature,
+        },
+      });
+      toast("successfully uploaded image", { type: "success" });
+    } catch (error) {
+      toast("Error", { type: "error" });
+    }
+  };
+  const handleFile = () => {
+    fileRef.current.click();
   };
   return (
     <Layout>
@@ -33,18 +70,36 @@ const DashboardLandingPageProfile = () => {
           </Typography.Subtitle>
           <Layout.Card>
             <Layout.Col className="gap-4">
-              <Layout.Row className="gap-4">
-                <Image
-                  src="/assets/avatar.jfif"
-                  height={128}
-                  width={128}
-                  className="rounded-full"
-                />
+              <Layout.Row className="gap-4 items-center ">
+                {auth?.data?.image ? (
+                  <Image
+                    src={auth?.data?.image?.url}
+                    height={128}
+                    width={128}
+                    loader={imageLoader}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <UserIcon className="w-20 h-20 bg-secondary text-gray-600 aspect-1/1 rounded-full p-2" />
+                )}
                 <Layout.Col className="flex-1 gap-4">
-                  <Button className="btn-general btn-lg tracking-tight w-full py-3 font-semibold rounded-full">
+                  <Button
+                    className="btn-general btn-lg tracking-tight w-full py-3 font-semibold rounded-full"
+                    onClick={handleFile}
+                    disabled={image.loading}
+                  >
                     Add New Image
                   </Button>
-                  <Button className="btn-outlined-secondary btn-lg tracking-tight w-full py-3 rounded-full">
+                  <Form.File
+                    ref={fileRef}
+                    onChange={onFileChange}
+                    accept="image/png, image/jpeg"
+                  />
+                  <Button
+                    className="btn-outlined-secondary btn-lg tracking-tight w-full py-3 rounded-full"
+                    onClick = {()=>auth.removeProfileImage.dispatch(null)}
+                    disabled={!auth?.data?.image || auth.removeProfileImage.loading}
+                  >
                     Remove
                   </Button>
                 </Layout.Col>
@@ -61,7 +116,12 @@ const DashboardLandingPageProfile = () => {
                   defaultValue={profile?.data?.bio}
                 />
                 <Layout.Row className="justify-end">
-                  <Button className="btn-primary btn-lg">Submit</Button>
+                  <Button
+                    className="btn-primary btn-lg"
+                    disabled={postProfile.loading}
+                  >
+                    Submit
+                  </Button>
                 </Layout.Row>
               </Form>
             </Layout.Col>
