@@ -7,6 +7,7 @@ import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
 import useFetch from "@/src/hooks/general/useFetch";
 import ChevronIcon from "@heroicons/react/24/solid/ArrowRightIcon";
+import Head from "next/head";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
@@ -24,8 +25,8 @@ const headings = [
 ];
 const subheading =
   "🌟 Link Up for Success: Amplify Your Reach and Influence! ✨";
-const ctaBtn = "Claim your linkify";
-const domain = "linkify-snowy.vercel.app/";
+const ctaBtn = "Claim your shortr";
+const domain = "shortr.in/";
 
 const UserNameValidator = () => {
   const [enquired, setEnquired] = useState(false);
@@ -42,12 +43,16 @@ const UserNameValidator = () => {
     <Layout>
       <Form onSubmit={onFormSubmit}>
         <Layout.Col className="justify-center gap-2 md:flex-row">
-          <Input placeholder={`${domain}@Username`} name="username" required />
+          <Input placeholder={`${domain}username`} name="username" required />
           <Button
             className="btn-general btn-lg font-bold"
             disabled={validateUsername.loading}
           >
-            {!enquired  ?ctaBtn:!validateUsername.data && !validateUsername.loading ? "Available":"Not available (Try another)"}
+            {!enquired
+              ? ctaBtn
+              : !validateUsername.data && !validateUsername.loading
+              ? "Available"
+              : "Not available (Try another)"}
           </Button>
           {enquired && !validateUsername.data && !validateUsername.loading && (
             <Link
@@ -55,7 +60,7 @@ const UserNameValidator = () => {
               className="text-green-500 text-center flex justify-center items-center p-3 rounded-lg"
             >
               Register Now
-              <ChevronIcon className="w-6 h-6"/>
+              <ChevronIcon className="w-6 h-6" />
             </Link>
           )}
         </Layout.Col>
@@ -67,6 +72,21 @@ const UserNameValidator = () => {
 export default function Home(props) {
   return (
     <Layout>
+      <Head>
+        <title>🔥Shortr</title>
+        <meta
+          property="og:image"
+          content="/public/shortr-ogimage.png"
+        />
+        <meta
+          name="description"
+          content="Join 25M+ people and link to everything you create, share and sell online. All from the one bio link."
+        />
+        <meta
+          property="og:title"
+          content="Shortr: Link everything you are"
+        />
+      </Head>
       <Layout.Container className="max-w-5xl">
         <Navbar />
         <Layout.Col className="gap-4 py-24">
@@ -84,11 +104,10 @@ export default function Home(props) {
   );
 }
 
-
-export const getServerSideProps = async (ctx)=>{
-  return{
-    props:{
-      index:Math.floor(Math.random() * headings.length)
-    }
-  }
-}
+export const getServerSideProps = async (ctx) => {
+  return {
+    props: {
+      index: Math.floor(Math.random() * headings.length),
+    },
+  };
+};

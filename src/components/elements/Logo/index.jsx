@@ -1,7 +1,7 @@
 import Typography from '@/src/components/utils/Typography'
 import React from 'react'
 
-const logoText = "🔥Linkify"
+const logoText = "🔥Shortr"
 
 const Logo = () => {
   return (
