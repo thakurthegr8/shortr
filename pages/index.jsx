@@ -5,7 +5,10 @@ import Form from "@/src/components/utils/Form";
 import Input from "@/src/components/utils/Form/Input";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
-import { useMemo } from "react";
+import useFetch from "@/src/hooks/general/useFetch";
+import ChevronIcon from "@heroicons/react/24/solid/ArrowRightIcon";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 
 const headings = [
   "🚀 Unlock Your Digital Universe: Explore, Discover, Connect! ✨",
@@ -22,7 +25,44 @@ const headings = [
 const subheading =
   "🌟 Link Up for Success: Amplify Your Reach and Influence! ✨";
 const ctaBtn = "Claim your linkify";
-const domain = "linkify.rtdevopsify.com/";
+const domain = "linkify-snowy.vercel.app/";
+
+const UserNameValidator = () => {
+  const [enquired, setEnquired] = useState(false);
+  const validateUsername = useFetch({
+    method: "POST",
+    url: "/api/validate_username",
+  });
+
+  const onFormSubmit = (data) => {
+    setEnquired(true);
+    validateUsername.dispatch(data);
+  };
+  return (
+    <Layout>
+      <Form onSubmit={onFormSubmit}>
+        <Layout.Col className="justify-center gap-2 md:flex-row">
+          <Input placeholder={`${domain}@Username`} name="username" required />
+          <Button
+            className="btn-general btn-lg font-bold"
+            disabled={validateUsername.loading}
+          >
+            {!enquired  ?ctaBtn:!validateUsername.data && !validateUsername.loading ? "Available":"Not available (Try another)"}
+          </Button>
+          {enquired && !validateUsername.data && !validateUsername.loading && (
+            <Link
+              href="/register"
+              className="text-green-500 text-center flex justify-center items-center p-3 rounded-lg"
+            >
+              Register Now
+              <ChevronIcon className="w-6 h-6"/>
+            </Link>
+          )}
+        </Layout.Col>
+      </Form>
+    </Layout>
+  );
+};
 
 export default function Home() {
   const index = useMemo(() => Math.floor(Math.random() * headings.length), []);
@@ -37,12 +77,7 @@ export default function Home() {
           <Typography.Subtitle className="text-center">
             {subheading}
           </Typography.Subtitle>
-          <Form onSubmit={() => null}>
-            <Layout.Col className="justify-center gap-2 md:flex-row">
-              <Input placeholder={`${domain}@Username`}/>
-              <Button className="btn-general btn-lg font-bold">{ctaBtn}</Button>
-            </Layout.Col>
-          </Form>
+          <UserNameValidator />
         </Layout.Col>
         <Features />
       </Layout.Container>
