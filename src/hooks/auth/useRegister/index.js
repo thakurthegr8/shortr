@@ -1,33 +1,46 @@
-import { loginWithEmailAndPasswordPayloadValidator } from "@/src/utils/schemaValidators/loginPayload";
-import axios from "axios";
 import React, { useState } from "react";
+import { registerWithEmailAndPasswordValidator } from "@/src/utils/schemaValidators/registerPayload";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
-const useLogin = () => {
+const useRegister = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
-  const loginWithEmailAndPassword = loginWithEmailAndPasswordPayloadValidator(
-    async (payload) => {
-        try {
-            setLoading(true);
-            const res = await axios.post("/api/auth/register", payload);
-            const responseData = await res.data;
-            if(!res.status != 201) throw new Error(responseData);
-            setData(responseData);
-        } catch (error) {
-            setError(error)
-        }finally{
-            setLoading(false);
-        }
+  const registerWithEmailAndPassword = async (payload) => {
+    try {
+      await registerWithEmailAndPasswordValidator(payload);
+      const updatedPayload = {
+        ...payload,
+        name: payload.name.toLowerCase(),
+      };
+      setLoading(true);
+      const res = await axios.post("/api/auth/register", updatedPayload);
+      const responseData = await res.data;
+      if (res.status === 200) {
+        setData(responseData);
+        toast("successfully registered", { type: "success" });
+        router.push("/");
+      } else {
+        throw responseData;
+      }
+    } catch (error) {
+      console.log(error);
+      setError(error.response?.data);
+      toast(error.response?.data, { type: "error" });
+    } finally {
+      setLoading(false);
     }
-  );
+  };
   return {
     data,
     loading,
     error,
-    loginWithEmailAndPassword
+    registerWithEmailAndPassword,
   };
 };
 
-export default useLogin;
+export default useRegister;

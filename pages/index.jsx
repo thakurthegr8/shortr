@@ -64,15 +64,14 @@ const UserNameValidator = () => {
   );
 };
 
-export default function Home() {
-  const index = useMemo(() => Math.floor(Math.random() * headings.length), []);
+export default function Home(props) {
   return (
     <Layout>
       <Layout.Container className="max-w-5xl">
         <Navbar />
         <Layout.Col className="gap-4 py-24">
           <Typography.Title className="text-center font-black lg:text-5xl">
-            {headings[index]}
+            {headings[props.index]}
           </Typography.Title>
           <Typography.Subtitle className="text-center">
             {subheading}
@@ -83,4 +82,13 @@ export default function Home() {
       </Layout.Container>
     </Layout>
   );
+}
+
+
+export const getServerSideProps = async (ctx)=>{
+  return{
+    props:{
+      index:Math.floor(Math.random() * headings.length)
+    }
+  }
 }

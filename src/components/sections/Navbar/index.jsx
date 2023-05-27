@@ -29,9 +29,8 @@ const AuthenticatedView = () => {
   );
 };
 
-const Navbar = (props) => {
+const Navbar = () => {
   const authContext = useAuth();
-  console.log(authContext);
   return (
     <Layout>
       <Layout.Row className="justify-between py-2 items-center">

@@ -10,7 +10,8 @@ export default db(async function (req, res) {
       return res.status(201).json(createUser);
     }
   } catch (error) {
-    console.log(error);
+    if(error instanceof Error)
+    return res.status(400).json(error.message);
     return res.status(400).json(error);
   }
 });

@@ -15,11 +15,26 @@ const UserSchema = new Schema(
     name: {
       type: Schema.Types.String,
       required: true,
+      trim:true,
+      lowercase:true,
+      validate:{
+        validator:function(name){
+          return /^[a-z\s]{5,30}$/.test(name)
+        },
+        message:"name should contain 5 to 30 characters with alphabets only"
+      }
     },
     email: {
       type: Schema.Types.String,
       required: true,
       unique: true,
+      lowercase:true,
+      validate:{
+        validator:function(name){
+          return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(name)
+        },
+        message:"invalid email format"
+      }
     },
     password: {
       type: Schema.Types.String,
@@ -39,11 +54,19 @@ const UserSchema = new Schema(
 
 UserSchema.pre("save", async function (next) {
   const user = this;
-
+  const User = this.constructor;
+  User.findOne({ email: this.email })
+  .then(existingUser => {
+    if (existingUser) {
+      throw new Error('email already exists.');
+    }
+  })
+  .catch(err => {
+    next(err);
+  });
   if (!user.isModified("password")) {
     return next();
   }
-
   try {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(user.password, salt);
