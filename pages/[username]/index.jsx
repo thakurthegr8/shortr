@@ -1,6 +1,7 @@
 import ReferenceLandingMain from "@/src/components/sections/ReferenceLanding/Main";
 import ReferenceLandingNavbar from "@/src/components/sections/ReferenceLanding/Navbar";
 import Layout from "@/src/components/utils/Layout";
+import withUrl from "@/src/middlewares/withUrl";
 import ReferenceLandingProvider from "@/src/providers/ReferenceLanding";
 import { dbPage } from "@/src/services/db";
 import LinkModel from "@/src/services/db/models/Link";
@@ -28,7 +29,7 @@ const ReferenceLandingPage = (props) => {
 
 export default ReferenceLandingPage;
 
-export const getServerSideProps = dbPage(async (ctx) => {
+export const getServerSideProps = withUrl( dbPage(async (ctx) => {
   try {
     const profile = await Profile.findOne({
       username: ctx.query.username,
@@ -48,4 +49,4 @@ export const getServerSideProps = dbPage(async (ctx) => {
       notFound: true,
     };
   }
-});
+}));

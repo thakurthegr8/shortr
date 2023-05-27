@@ -24,7 +24,7 @@ export const dbPage = (handler) => {
     if (mongoose.connections[0].readyState) {
       return handler(ctx);
     }
-    await mongoose.connect(localConnectionString, {
+    await mongoose.connect(remoteConnectionString, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
