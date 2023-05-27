@@ -21,7 +21,7 @@ const Navigation = () => {
         <Link
           href={Item.path}
           key={Item.name}
-          className="p-2 hover:bg-gray-200 transition-all rounded-2xl text-gray-600 font-semibold"
+          className="p-2 hover:bg-gray-200 dark:hover:bg-dark_secondary transition-all rounded-2xl text-gray-600 dark:text-white font-semibold"
         >
           <Layout.Col className="md:flex-row gap-2 items-center">
             <Item.Icon className="w-5 h-5 font-bold" />
@@ -36,7 +36,7 @@ const Navigation = () => {
 const DashboardNavbar = () => {
   return (
     <Layout>
-      <Layout.Col className="py-3 px-4 border-b divide-y gap-2 bg-white">
+      <Layout.Col className="py-3 px-4 border-b dark:border-white/20 divide-y gap-2 bg-white dark:bg-general">
         <Layout.Row className="justify-between items-center">
           <Layout.Row className="gap-2 items-center">
             <Link href="/">

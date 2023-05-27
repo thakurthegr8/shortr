@@ -41,10 +41,10 @@ const AccountAvatar = () => {
             <Avatar name={name} />
           )}
         </Menu.Button>
-        <Menu.Items className="absolute w-72 right-0 bg-white border rounded-xl shadow-md flex-col overflow-hidden">
+        <Menu.Items className="absolute w-72 right-0 bg-white dark:bg-dark_secondary border dark:border-none rounded-xl shadow-md flex-col overflow-hidden">
           <Menu.Item>
             <Link href="/me">
-              <Layout.Row className="p-2 gap-2 items-center border-b">
+              <Layout.Row className="p-2 gap-2 items-center border-b dark:border-white/20">
                 {auth.data?.image ? (
                   <Image
                     src={auth.data.image.url}
@@ -65,7 +65,7 @@ const AccountAvatar = () => {
           <Menu.Item
             as="div"
             onClick={() => null}
-            className="p-2 w-full gap-2 text-left flex flex-row cursor-pointer items-center hover:bg-gray-100 "
+            className="p-2 w-full gap-2 text-left flex flex-row cursor-pointer items-center hover:bg-gray-100 dark:hover:bg-white/10 "
           >
             <LogOutIcon className="w-6 h-6" />
             <Typography.Caption

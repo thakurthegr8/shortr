@@ -11,7 +11,7 @@
 }
 
 body {
-  @apply bg-gray-50;
+  @apply bg-gray-50 dark:bg-general text-general dark:text-white;
 }
 
 /* buttons */
@@ -35,7 +35,7 @@ button {
   @apply bg-secondary border border-secondary active:bg-secondary/75 hover:bg-secondary/75 text-general;
 }
 .btn-general {
-  @apply bg-general border border-general active:bg-general/75 hover:bg-general/75 text-white;
+  @apply bg-general dark:bg-white border border-general active:bg-general/75 dark:active:bg-white/75 dark:hover:bg-white/75 hover:bg-general/75 text-white dark:text-general;
 }
 
 /* outlined */
@@ -69,7 +69,7 @@ button {
 /* Icon */
 
 .btn-icon {
-  @apply rounded-full text-black bg-transparent p-2 hover:bg-gray-200 active:bg-gray-300;
+  @apply rounded-full text-black dark:text-white bg-transparent p-2 hover:bg-gray-200 dark:hover:bg-white/20 active:bg-gray-300;
 }
 
 /* typography */
@@ -93,7 +93,7 @@ span {
 }
 
 input,textarea,select {
-  @apply bg-gray-100 outline-none p-3 rounded-lg border border-gray-300 focus:border-general transition-all font-semibold  text-sm;
+  @apply bg-gray-100 dark:bg-dark_secondary outline-none p-3 rounded-lg border dark:border-white/20 border-gray-300 focus:border-general transition-all font-semibold  text-sm;
 }
 
 /* toast */

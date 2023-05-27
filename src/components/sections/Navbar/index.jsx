@@ -24,7 +24,7 @@ const AuthenticatedView = () => {
       <Link href="/dashboard">
         <Button className="btn-general">Dashboard</Button>
       </Link>
-      <AccountAvatar/>
+      <AccountAvatar />
     </>
   );
 };
@@ -34,16 +34,14 @@ const Navbar = (props) => {
   console.log(authContext);
   return (
     <Layout>
-      <Layout.Container className="max-w-5xl">
-        <Layout.Row className="justify-between py-2 items-center">
-          <Link href="/">
-            <Logo />
-          </Link>
-          <Layout.Row className="gap-2 items-center">
-            {authContext.data ? <AuthenticatedView /> : <UnAuthenticatedView />}
-          </Layout.Row>
+      <Layout.Row className="justify-between py-2 items-center">
+        <Link href="/">
+          <Logo />
+        </Link>
+        <Layout.Row className="gap-2 items-center">
+          {authContext.data ? <AuthenticatedView /> : <UnAuthenticatedView />}
         </Layout.Row>
-      </Layout.Container>
+      </Layout.Row>
     </Layout>
   );
 };
