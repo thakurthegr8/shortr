@@ -57,16 +57,19 @@ const useFetch = (props) => {
       setLoading(false);
     }
   };
-  const dispatch = (payload = null) => {
-    if (props.method === "GET") {
-      getData();
-    } else if (props.method === "POST") {
-      postData(payload);
-    } else if (props.method === "PUT") {
-      putData(payload);
-    } else if (props.method === "DELETE") {
-      deleteData(payload);
-    }
+  const dispatch = async (payload = null) => {
+    return new Promise((resolve, reject) => {
+      if (props.method === "GET") {
+        resolve(getData());
+      } else if (props.method === "POST") {
+        resolve(postData(payload));
+      } else if (props.method === "PUT") {
+        resolve(putData(payload));
+      } else if (props.method === "DELETE") {
+        resolve(deleteData(payload));
+      }
+      reject();
+    });
   };
 
   //   if (props.method === "GET") dispatch();

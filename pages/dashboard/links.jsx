@@ -9,7 +9,6 @@ import Link from "@/src/services/db/models/Link";
 import React from "react";
 
 const DashboardLinks = (props) => {
-  console.log(props.data)
   return (
     <LinkProvider data={JSON.parse(props.data)}>
       <Layout>

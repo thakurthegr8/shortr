@@ -19,24 +19,30 @@ const LinkInput = ({ type, placeholder, ...restProps }) => {
   const toggleInput = () => {
     toggle((prev) => !prev);
   };
+  const onSubmit = (e) => {
+    console.log(e.target.value);
+  };
   return (
-    <Layout.Row>
-      <Form.Input
-        type={type}
-        placeholder={placeholder}
-        name="title"
-        className="text-sm border-none p-2 bg-transparent flex-1 text-ellipsis"
-        disabled={disabled}
-        {...restProps}
-      />
-      <Button className="btn-icon" onClick={toggleInput}>
-        {disabled ? (
-          <PencilIcon className="w-5 h-5" />
-        ) : (
-          <CheckIcon className="w-5 h-5" />
-        )}
-      </Button>
-    </Layout.Row>
+    <Form>
+      <Layout.Row>
+        <Form.Input
+          type={type}
+          onChange={onSubmit}
+          placeholder={placeholder}
+          name="title"
+          className="text-sm border-none p-2 bg-transparent flex-1 text-ellipsis"
+          disabled={disabled}
+          {...restProps}
+        />
+        <Button className="btn-icon" onClick={toggleInput}>
+          {disabled ? (
+            <PencilIcon className="w-5 h-5" />
+          ) : (
+            <CheckIcon className="w-5 h-5" />
+          )}
+        </Button>
+      </Layout.Row>
+    </Form>
   );
 };
 
@@ -74,7 +80,9 @@ const AddLinkCard = (props) => {
     <Layout.Card className="border-yellow-400">
       <Layout.Col className="gap-4">
         <Layout.Row className="items-center justify-between">
-          <Typography.Subtitle className="font-semibold">Add Link</Typography.Subtitle>
+          <Typography.Subtitle className="font-semibold">
+            Add Link
+          </Typography.Subtitle>
           <Button className="btn-icon" onClick={props.close}>
             <CloseIcon className="w-6 h-6" />
           </Button>
@@ -121,20 +129,18 @@ const LinkCard = (props) => {
     <Layout.Card>
       <Layout.Col>
         <Layout.Col>
-          <Form>
-            <Layout.Col className="items-stretch">
-              <LinkInput
-                placeholder="Enter title..."
-                type="title"
-                defaultValue={props?.title}
-              />
-              <LinkInput
-                placeholder="Enter url..."
-                type="url"
-                defaultValue={props?.value}
-              />
-            </Layout.Col>
-          </Form>
+          <Layout.Col className="items-stretch">
+            <LinkInput
+              placeholder="Enter title..."
+              type="title"
+              defaultValue={props?.title}
+            />
+            <LinkInput
+              placeholder="Enter url..."
+              type="url"
+              defaultValue={props?.value}
+            />
+          </Layout.Col>
         </Layout.Col>
         <Layout.Row className="justify-end">
           <Button className="btn-icon">

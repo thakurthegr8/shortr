@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useAuth } from "@/src/providers/Auth";
 import Layout from "../../utils/Layout";
 import { imageLoader } from "@/src/utils/image";
+import { useRouter } from "next/router";
 
 export const Avatar = (props) => {
   const initial = props.name
@@ -21,19 +22,40 @@ export const Avatar = (props) => {
 
 const AccountAvatar = () => {
   const auth = useAuth();
+  const router = useRouter();
   const name = auth?.data?.name;
   if (!auth.data) return null;
   return (
     <>
       <Menu className="relative z-10" as="div">
         <Menu.Button>
-        {auth.data?.image ? <Image src={auth.data.image.url}  width={44} height={44} loader={imageLoader} className="bg-general rounded-full aspect-square object-cover"/>:<Avatar name={name} />}
+          {auth.data?.image ? (
+            <Image
+              src={auth.data.image.url}
+              width={44}
+              height={44}
+              loader={imageLoader}
+              className="bg-general rounded-full aspect-square object-cover"
+            />
+          ) : (
+            <Avatar name={name} />
+          )}
         </Menu.Button>
         <Menu.Items className="absolute w-72 right-0 bg-white border rounded-xl shadow-md flex-col overflow-hidden">
           <Menu.Item>
             <Link href="/me">
               <Layout.Row className="p-2 gap-2 items-center border-b">
-                {auth.data?.image ? <Image src={auth.data.image.url} width={50} height={50} loader={imageLoader} className="bg-general rounded-full aspect-square object-cover object-cover"/>:<Avatar name={name} />}
+                {auth.data?.image ? (
+                  <Image
+                    src={auth.data.image.url}
+                    width={50}
+                    height={50}
+                    loader={imageLoader}
+                    className="bg-general rounded-full aspect-square object-cover object-cover"
+                  />
+                ) : (
+                  <Avatar name={name} />
+                )}
                 <Typography.Heading className="font-bold">
                   {name}
                 </Typography.Heading>
@@ -42,11 +64,14 @@ const AccountAvatar = () => {
           </Menu.Item>
           <Menu.Item
             as="div"
-            onClick={()=>null}
+            onClick={() => null}
             className="p-2 w-full gap-2 text-left flex flex-row cursor-pointer items-center hover:bg-gray-100 "
           >
             <LogOutIcon className="w-6 h-6" />
-            <Typography.Caption className="text-sm">
+            <Typography.Caption
+              className="text-sm"
+              onClick={() => auth.signoutHandler.dispatch(null).then(res=>router.reload("/"))}
+            >
               Sign Out
             </Typography.Caption>
           </Menu.Item>
