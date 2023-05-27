@@ -76,7 +76,7 @@ export default function Home(props) {
         <title>🔥Shortr</title>
         <meta
           property="og:image"
-          content="/public/shortr-ogimage.png"
+          content="https://raw.githubusercontent.com/thakurthegr8/linkify/main/public/shortr-ogimage.png"
         />
         <meta
           name="description"
