@@ -1,5 +1,5 @@
 import mongoose, { model, Schema } from "mongoose";
-import bcrypt from "bcrypt";
+
 const LinkSchema = new Schema(
   {
     link_for: {

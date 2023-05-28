@@ -17,7 +17,7 @@ body {
 /* buttons */
 
 button {
-  @apply relative overflow-hidden rounded-lg font-normal text-sm disabled:bg-gray-200 disabled:border-gray-300 disabled:text-gray-400  py-1 px-2 flex justify-center items-center active:scale-95 transition-all tracking-tight disabled:hover:bg-gray-200 disabled:active:scale-100;
+  @apply relative overflow-hidden rounded-lg font-normal text-sm dark:disabled:bg-white/10 disabled:bg-gray-200 disabled:border-gray-300 dark:disabled:border-none disabled:text-gray-400 py-1 px-2 md:py-2 md:px-3 flex justify-center items-center active:scale-95 transition-all tracking-tight disabled:hover:bg-gray-300 dark:disabled:hover:bg-white/10 disabled:active:scale-100;
 }
 
 .btn-sm {
@@ -32,7 +32,7 @@ button {
   @apply bg-primary border border-primary active:bg-primary/75 hover:bg-primary/75 text-white;
 }
 .btn-secondary {
-  @apply bg-secondary border border-secondary active:bg-secondary/75 hover:bg-secondary/75 text-general;
+  @apply bg-secondary dark:bg-dark_secondary dark:text-white border dark:border-white/10 border-secondary active:bg-secondary/75 dark:active:bg-dark_secondary/25 hover:bg-secondary/75 dark:hover:bg-dark_secondary/50 text-general;
 }
 .btn-general {
   @apply bg-general dark:bg-white border border-general active:bg-general/75 dark:active:bg-white/75 dark:hover:bg-white/75 hover:bg-general/75 text-white dark:text-general;

@@ -1,0 +1,19 @@
+.main_container{
+    @apply max-w-sm h-full;
+}
+.main_col{
+    @apply gap-2 pt-16;
+}
+.main_heading{
+    @apply font-bold;
+}
+.main_form{
+    @apply flex flex-col gap-2;
+}
+.main_form_input{
+    @apply flex flex-col gap-2;
+}
+
+.main_register_btn{
+    @apply font-bold w-full;
+}

@@ -11,7 +11,7 @@ const generateSignature = (publicId) => {
   const timestamp = new Date().getTime();
   return `public_id=${publicId}&timestamp=${timestamp}${process.env.NEXT_PUBLIC_STORAGE_API_SECRET}`;
 };
-export const deleteProfileImage = async ({ public_id, signature }) => {
+export const deleteProfileImage = async ({ public_id }) => {
   try {
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_STORAGE_URL}/image/destroy`,

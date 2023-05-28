@@ -64,7 +64,7 @@ const DashboardLandingPageProfile = () => {
   return (
     <Layout>
       <Layout.Container>
-        <Layout.Col className="py-4 px-4 py-16 md:px-16">
+        <Layout.Col className="py-4 px-2 md:py-16 md:px-16">
           <Typography.Subtitle className="font-semibold">
             Profile
           </Typography.Subtitle>

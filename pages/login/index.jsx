@@ -1,46 +1,14 @@
-import Navbar from "@/src/components/sections/Navbar";
-import Button from "@/src/components/utils/Button";
-import Form from "@/src/components/utils/Form";
-import Layout from "@/src/components/utils/Layout";
-import Typography from "@/src/components/utils/Typography";
-import useLogin from "@/src/hooks/auth/useLogin";
-import { useAuth } from "@/src/providers/Auth";
-import React, { useState } from "react";
-
-const fields = [
-  { name: "email",type: "email", placeholder: "Enter full email..." },
-  { name: "password",type: "password", placeholder: "Enter password..." },
-];
+import React from "react";
+import Page from "@/src/components/pages";
+import LoginPage from "@/src/components/pages/Login";
+import { METADATA } from "@/src/constants/login";
+import { LOGOTEXT } from "@/src/constants";
 
 const Login = () => {
-  const heading = "Login to continue";
-  const loginBtnText = "Login";
-  const registerBtnText = "New User? Register"
-  const authContext = useAuth();
-  const onFormSubmit = async (data) => {
-    await authContext.loginWithEmailAndPassword(data);
-  };
-
   return (
-    <Layout>
-      <Layout.Container className="max-w-5xl">
-        <Navbar />
-      </Layout.Container>
-      <Layout.Container className="max-w-sm h-full">
-        <Layout.Col className="gap-2 pt-16">
-          <Typography.Heading className="font-bold">
-            {heading}
-          </Typography.Heading>
-          <Form className="flex flex-col gap-2" onSubmit={onFormSubmit}>
-            {
-              fields.map((item,index)=><Form.Input {...item} className="placeholder:font-normal" key={index}/>)
-            }
-            <Button className="btn-general">{loginBtnText}</Button>
-          </Form>
-          <Button className="btn-secondary font-bold">{registerBtnText}</Button>
-        </Layout.Col>
-      </Layout.Container>
-    </Layout>
+    <Page meta={METADATA} page={`${LOGOTEXT} | Login`}>
+      <LoginPage />
+    </Page>
   );
 };
 

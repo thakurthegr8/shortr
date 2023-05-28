@@ -1,71 +1,16 @@
-import Logo from "@/src/components/elements/Logo";
-import Navbar from "@/src/components/sections/Navbar";
-import Button from "@/src/components/utils/Button";
-import Form from "@/src/components/utils/Form";
-import Layout from "@/src/components/utils/Layout";
-import Typography from "@/src/components/utils/Typography";
-import useRegister from "@/src/hooks/auth/useRegister";
-import Link from "next/link";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+import React from "react";
+//utils
+import Page from "@/src/components/pages";
+//constants
+import { METADATA } from "@/src/constants/register";
+import { LOGOTEXT } from "@/src/constants";
+import RegisterPage from "@/src/components/pages/Register";
 
-const fields = [
-  { name: "name", type: "text", placeholder: "Enter full name..." },
-  { name: "email", type: "text", placeholder: "Enter full email..." },
-  { name: "password", type: "password", placeholder: "Enter password..." },
-  {
-    name: "conf_password",
-    type: "password",
-    placeholder: "Confirm password...",
-  },
-];
-
-const heading = "Register";
-const registerBtnText = "Register";
-const loginBtnText = "Already a User? Login";
 const Register = () => {
-  const register = useRegister();
-
-  const onFormSubmit = async (data) => {
-    
-    if (data.password !== data.conf_password) {
-      toast("please confirm your password", { type: "error" });
-      return;
-    }
-    const {conf_password, ...restPayload} = data;
-    await register.registerWithEmailAndPassword(restPayload);
-  };
-
   return (
-    <Layout>
-      <Layout.Container className="max-w-5xl">
-        <Navbar />
-      </Layout.Container>
-      <Layout.Container className="max-w-sm h-full">
-        <Layout.Col className="gap-2 pt-16">
-          <Typography.Heading className="font-bold">
-            {heading}
-          </Typography.Heading>
-          <Form className="flex flex-col gap-2" onSubmit={onFormSubmit}>
-            {fields.map((item, index) => (
-              <Form.Input
-                {...item}
-                className="placeholder:font-normal"
-                key={index}
-              />
-            ))}
-            <Button className="btn-general" disabled={register.loading}>
-              {registerBtnText}
-            </Button>
-          </Form>
-          <Link href="/login" className="w-full">
-            <Button className="btn-secondary font-bold tracking-tight w-full">
-              {loginBtnText}
-            </Button>
-          </Link>
-        </Layout.Col>
-      </Layout.Container>
-    </Layout>
+    <Page meta={METADATA} page={`${LOGOTEXT} | Register`}>
+      <RegisterPage/>
+    </Page>
   );
 };
 

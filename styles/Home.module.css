@@ -1,0 +1,12 @@
+.container{
+    @apply max-w-5xl;
+}
+.main_col{
+   @apply gap-4 py-24;
+}
+.main_heading{
+   @apply text-center font-black lg:text-5xl;
+}
+.main_subheading{
+    @apply text-center;
+}

@@ -8,6 +8,9 @@ import Typography from "@/src/components/utils/Typography";
 import ShareIcon from "@heroicons/react/24/outline/ShareIcon";
 import AppearanceIcon from "@heroicons/react/24/outline/Bars2Icon";
 import LinkIcon from "@heroicons/react/24/outline/LinkIcon";
+import { useProfile } from "@/src/providers/Profile";
+import { toast } from "react-toastify";
+import { DOMAIN } from "@/src/constants";
 
 const navItems = [
   { name: "appearance", path: "/dashboard", Icon: AppearanceIcon },
@@ -21,7 +24,7 @@ const Navigation = () => {
         <Link
           href={Item.path}
           key={Item.name}
-          className="p-2 hover:bg-gray-200 dark:hover:bg-dark_secondary transition-all rounded-2xl text-gray-600 dark:text-white font-semibold"
+          className="p-2 hover:bg-gray-200 flex-1 lg:flex-0 dark:hover:bg-dark_secondary transition-all rounded-2xl text-gray-600 dark:text-white font-semibold"
         >
           <Layout.Col className="md:flex-row gap-2 items-center">
             <Item.Icon className="w-5 h-5 font-bold" />
@@ -34,9 +37,14 @@ const Navigation = () => {
 };
 
 const DashboardNavbar = () => {
+  const profile = useProfile();
+  const copyToClipboard = (e)=>{
+    navigator.clipboard.writeText(`${DOMAIN}username`);
+    toast("Link successfully copied to clipboard", {type:"info"})
+  }
   return (
     <Layout>
-      <Layout.Col className="py-3 px-4 border-b dark:border-white/20 divide-y gap-2 bg-white dark:bg-general">
+      <Layout.Col className="py-3 px-4 border-b dark:border-white/20 divide-y dark:divide-none gap-2 bg-white dark:bg-general">
         <Layout.Row className="justify-between items-center">
           <Layout.Row className="gap-2 items-center">
             <Link href="/">
@@ -47,7 +55,7 @@ const DashboardNavbar = () => {
             </Layout.Row>
           </Layout.Row>
           <Layout.Row className="items-center ">
-            <Button className="btn-secondary">
+            <Button className="btn-secondary" onClick={copyToClipboard}>
               Share
               <ShareIcon className="ml-2 w-4 h-4" />
             </Button>
