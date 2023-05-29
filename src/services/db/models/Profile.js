@@ -9,10 +9,12 @@ const ProfileSchema = new Schema(
     username: {
       type: Schema.Types.String,
       required: true,
-      unique:true
+      unique: true,
+      trim: true,
     },
     bio: {
       type: Schema.Types.String,
+      trim: true,
     },
   },
   { timestamps: true }

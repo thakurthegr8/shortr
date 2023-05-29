@@ -8,6 +8,7 @@ import { useAuth } from "@/src/providers/Auth";
 import { useProfile } from "@/src/providers/Profile";
 import { imageLoader } from "@/src/utils/image";
 import { FILE_UPLOAD_LIMIT } from "@/src/utils/limiters";
+import { compareObj } from "@/src/utils/objects";
 import { profilePayloadValidator } from "@/src/utils/schemaValidators/profilePayload";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import Image from "next/image";
@@ -27,7 +28,12 @@ const DashboardLandingPageProfile = () => {
   const onSubmit = async (formData) => {
     try {
       await profilePayloadValidator(formData);
-      postProfile.dispatch(formData);
+      const currentProfileInfo = {
+        username: profile.data?.username,
+        bio: profile.data?.bio,
+      };
+      const payload = compareObj(formData, currentProfileInfo);
+      if (payload) postProfile.dispatch(payload);
     } catch (error) {
       toast("error", { type: "error" });
       console.log(error);
@@ -97,8 +103,10 @@ const DashboardLandingPageProfile = () => {
                   />
                   <Button
                     className="btn-outlined-secondary dark:text-white btn-lg tracking-tight w-full py-3 rounded-full"
-                    onClick = {()=>auth.removeProfileImage.dispatch(null)}
-                    disabled={!auth?.data?.image || auth.removeProfileImage.loading}
+                    onClick={() => auth.removeProfileImage.dispatch(null)}
+                    disabled={
+                      !auth?.data?.image || auth.removeProfileImage.loading
+                    }
                   >
                     Remove
                   </Button>
