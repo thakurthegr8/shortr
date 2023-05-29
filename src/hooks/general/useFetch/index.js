@@ -1,3 +1,4 @@
+import { generateQueryString } from "@/src/utils/url";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -8,6 +9,7 @@ const useFetch = (props) => {
   const getData = async () => {
     setError(null);
     setLoading(true);
+    setData(null);
     try {
       const res = await axios.get(props.url);
       const resData = await res.data;
@@ -21,6 +23,7 @@ const useFetch = (props) => {
   const postData = async (payload) => {
     setError(null);
     setLoading(true);
+    setData(null);
     try {
       const res = await axios.post(props.url, payload);
       const resData = await res.data;
@@ -34,6 +37,7 @@ const useFetch = (props) => {
   const putData = async (payload) => {
     setError(null);
     setLoading(true);
+    setData(null);
     try {
       const res = await axios.put(props.url, payload);
       const resData = await res.data;
@@ -47,8 +51,11 @@ const useFetch = (props) => {
   const deleteData = async (payload) => {
     setError(null);
     setLoading(true);
+    setData(null);
     try {
-      const res = await axios.delete(props.url, payload);
+      const res = await axios.delete(
+        `${props.url}/?${generateQueryString(payload)}`
+      );
       const resData = await res.data;
       setData(resData);
     } catch (error) {
@@ -76,7 +83,7 @@ const useFetch = (props) => {
   useEffect(() => {
     if (props.method === "GET") getData();
   }, []);
-  return { data, error, loading, dispatch };
+  return { data,setData, error, loading, dispatch };
 };
 
 export default useFetch;

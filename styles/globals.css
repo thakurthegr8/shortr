@@ -17,7 +17,11 @@ body {
 /* buttons */
 
 button {
-  @apply relative overflow-hidden rounded-lg font-normal text-sm dark:disabled:bg-white/10 disabled:bg-gray-200 disabled:border-gray-300 dark:disabled:border-none disabled:text-gray-400 py-1 px-2 md:py-2 md:px-3 flex justify-center items-center active:scale-95 transition-all tracking-tight disabled:hover:bg-gray-300 dark:disabled:hover:bg-white/10 disabled:active:scale-100;
+  @apply relative overflow-hidden rounded-lg font-normal text-sm py-1 px-2 md:py-2 md:px-3 flex justify-center items-center active:scale-95 transition-all tracking-tight 
+   disabled:hover:bg-gray-300  disabled:text-gray-400  disabled:active:scale-100
+   dark:disabled:bg-white/10 dark:disabled:text-gray-300 dark:disabled:border-none
+   dark:disabled:hover:bg-white/10
+   ;
 }
 
 .btn-sm {
@@ -92,12 +96,14 @@ span {
   @apply text-sm tracking-tight;
 }
 
-input,textarea,select {
-  @apply bg-gray-100 dark:bg-dark_secondary outline-none p-3 rounded-lg border dark:border-white/20 border-gray-300 focus:border-general transition-all font-semibold  text-sm;
+input,
+textarea,
+select {
+  @apply bg-gray-100 dark:bg-dark_secondary outline-none p-3 rounded-lg border dark:border-white/20 border-gray-300 focus:border-general dark:focus:border-white transition-all font-semibold  text-sm;
 }
 
 /* toast */
 
-.Toastify__toast{
+.Toastify__toast {
   @apply text-sm p-1 capitalize;
 }

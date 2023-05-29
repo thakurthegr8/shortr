@@ -77,7 +77,7 @@ const DashboardLandingPageProfile = () => {
                     height={128}
                     width={128}
                     loader={imageLoader}
-                    className="rounded-full object-contain aspect-1/1 overflow-hidden"
+                    className="rounded-full object-cover aspect-square overflow-hidden"
                   />
                 ) : (
                   <UserIcon className="w-20 h-20 bg-secondary text-gray-600 aspect-1/1 rounded-full p-2" />
@@ -96,7 +96,7 @@ const DashboardLandingPageProfile = () => {
                     accept="image/png, image/jpeg"
                   />
                   <Button
-                    className="btn-outlined-secondary btn-lg tracking-tight w-full py-3 rounded-full"
+                    className="btn-outlined-secondary dark:text-white btn-lg tracking-tight w-full py-3 rounded-full"
                     onClick = {()=>auth.removeProfileImage.dispatch(null)}
                     disabled={!auth?.data?.image || auth.removeProfileImage.loading}
                   >

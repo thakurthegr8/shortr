@@ -15,11 +15,14 @@ const ReferenceLandingPage = (props) => {
     links: JSON.parse(props.data.links),
     profile: JSON.parse(props.data.profile),
   };
-  const metaData =useMemo( ()=>[
-    { property: "og:title", content: payload.profile.username },
-    { property: "description", content: payload.profile.bio },
-    { property: "og:image", content: payload.profile.profile_for.image?.url },
-  ],[]);
+  const metaData = useMemo(
+    () => [
+      { property: "og:title", content: payload.profile.username },
+      { property: "description", content: payload.profile.bio },
+      { property: "og:image", content: payload.profile.profile_for.image?.url },
+    ],
+    []
+  );
   return (
     <Page meta={metaData} page={`${LOGOTEXT} | ${payload.profile.username}`}>
       <ReferenceLandingProvider value={payload}>
@@ -45,7 +48,10 @@ export const getServerSideProps = withUrl(
         username: ctx.query.username,
       }).populate("profile_for");
       if (!profile) return { notFound: true };
-      const links = await LinkModel.find({ link_for: profile.profile_for });
+      const links = await LinkModel.find({
+        link_for: profile.profile_for,
+        enabled: true,
+      });
       return {
         props: {
           data: {

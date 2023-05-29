@@ -31,12 +31,25 @@ const POST = withSessionApi(
 
 const PUT = withSessionApi(
   db(async (req, res) => {
-    const payload = {
-      ...req.body,
-      profile_for: req.user,
-    };
+    const { _id, ...restBody } = req.body;
     try {
-      const data = await Link.findOneAndUpdate(payload);
+      const data = await Link.findOneAndUpdate({ _id }, restBody, {
+        new: true,
+      });
+      return res.status(201).json(data);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  })
+);
+const DELETE = withSessionApi(
+  db(async (req, res) => {
+    console.log(req.query);
+    try {
+      const data = await Link.findOneAndDelete({
+        _id: req.query._id,
+        link_for: req.user,
+      });
       return res.status(201).json(data);
     } catch (error) {
       return res.status(400).json(error);
@@ -53,6 +66,9 @@ const handler = async (req, res) => {
   }
   if (req.method === "PUT") {
     return PUT(req, res);
+  }
+  if (req.method === "DELETE") {
+    return DELETE(req, res);
   }
   return res.status(405).json("method not allowed");
 };

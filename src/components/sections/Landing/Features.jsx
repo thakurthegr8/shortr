@@ -42,7 +42,7 @@ const Features = () => {
         <Layout.Grid className="grid-cols-1 md:grid-cols-2 gap-8 py-8">
           {featureElements.map((item, index) => (
             <Layout.Card key={index}>
-              <Typography.Title className="lg:text-7xl">{item.emoji}</Typography.Title>
+              <Typography.Subtitle className="lg:text-7xl">{item.emoji}</Typography.Subtitle>
               <Typography.Subtitle className="font-bold">
                 {item.name}
               </Typography.Subtitle>

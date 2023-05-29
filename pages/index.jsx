@@ -20,7 +20,7 @@ const Home = (props) => {
         <Navbar />
         <Layout.Col className={styles.main_col}>
           <Typography.Title className={styles.main_heading}>
-            {HEADINGS[props.index]}
+            {HEADINGS[0]}
           </Typography.Title>
           <Typography.Subtitle className={styles.main_subheading}>
             {SUBEHEADING}
@@ -34,11 +34,3 @@ const Home = (props) => {
 }
 
 export default Home;
-
-export const getServerSideProps = async (ctx) => {
-  return {
-    props: {
-      index: Math.floor(Math.random() * HEADINGS.length),
-    },
-  };
-};

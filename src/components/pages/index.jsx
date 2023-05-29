@@ -10,8 +10,8 @@ const Page = (props) => {
         <title>
           {props.page.toString()}
         </title>
-        {props.meta.map((item) => (
-          <meta {...item} key={item.property} />
+        {props.meta.map((item,index) => (
+          <meta {...item} key={index} />
         ))}
       </Head>
       {props.children}
