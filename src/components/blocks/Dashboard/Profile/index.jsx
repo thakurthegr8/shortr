@@ -69,73 +69,67 @@ const DashboardLandingPageProfile = () => {
   };
   return (
     <Layout>
-      <Layout.Container>
-        <Layout.Col className="py-4 px-2 md:py-16 md:px-16">
-          <Typography.Subtitle className="font-semibold">
-            Profile
-          </Typography.Subtitle>
-          <Layout.Card>
-            <Layout.Col className="gap-4">
-              <Layout.Row className="gap-4 items-center ">
-                {auth?.data?.image ? (
-                  <Image
-                    src={auth?.data?.image?.url}
-                    height={128}
-                    width={128}
-                    loader={imageLoader}
-                    className="rounded-full object-cover aspect-square overflow-hidden"
-                  />
-                ) : (
-                  <UserIcon className="w-20 h-20 bg-secondary text-gray-600 aspect-1/1 rounded-full p-2" />
-                )}
-                <Layout.Col className="flex-1 gap-4">
-                  <Button
-                    className="btn-general btn-lg tracking-tight w-full py-3 font-semibold rounded-full"
-                    onClick={handleFile}
-                    disabled={image.loading}
-                  >
-                    Add New Image
-                  </Button>
-                  <Form.File
-                    ref={fileRef}
-                    onChange={onFileChange}
-                    accept="image/png, image/jpeg"
-                  />
-                  <Button
-                    className="btn-outlined-secondary dark:text-white btn-lg tracking-tight w-full py-3 rounded-full"
-                    onClick={() => auth.removeProfileImage.dispatch(null)}
-                    disabled={
-                      !auth?.data?.image || auth.removeProfileImage.loading
-                    }
-                  >
-                    Remove
-                  </Button>
-                </Layout.Col>
-              </Layout.Row>
-              <Form className="flex flex-col gap-2" onSubmit={onSubmit}>
-                <Form.Input
-                  name="username"
-                  placeholder="Enter your username..."
-                  defaultValue={profile?.data?.username}
-                />
-                <Form.Input
-                  name="bio"
-                  placeholder="Enter your bio..."
-                  defaultValue={profile?.data?.bio}
-                />
-                <Layout.Row className="justify-end">
-                  <Button
-                    className="btn-primary btn-lg"
-                    disabled={postProfile.loading}
-                  >
-                    Submit
-                  </Button>
-                </Layout.Row>
-              </Form>
+      <Typography.Subtitle className="font-semibold">
+        Profile
+      </Typography.Subtitle>
+      <Layout.Card>
+        <Layout.Col className="gap-4">
+          <Layout.Row className="gap-4 items-center ">
+            {auth?.data?.image ? (
+              <Image
+                src={auth?.data?.image?.url}
+                height={128}
+                width={128}
+                loader={imageLoader}
+                className="rounded-full object-cover aspect-square overflow-hidden"
+              />
+            ) : (
+              <UserIcon className="w-20 h-20 bg-secondary text-gray-600 aspect-1/1 rounded-full p-2" />
+            )}
+            <Layout.Col className="flex-1 gap-4">
+              <Button
+                className="btn-general btn-lg tracking-tight w-full py-3 font-semibold rounded-full"
+                onClick={handleFile}
+                disabled={image.loading}
+              >
+                Add New Image
+              </Button>
+              <Form.File
+                ref={fileRef}
+                onChange={onFileChange}
+                accept="image/png, image/jpeg"
+              />
+              <Button
+                className="btn-outlined-secondary dark:text-white btn-lg tracking-tight w-full py-3 rounded-full"
+                onClick={() => auth.removeProfileImage.dispatch(null)}
+                disabled={!auth?.data?.image || auth.removeProfileImage.loading}
+              >
+                Remove
+              </Button>
             </Layout.Col>
-          </Layout.Card>
+          </Layout.Row>
+          <Form className="flex flex-col gap-2" onSubmit={onSubmit}>
+            <Form.Input
+              name="username"
+              placeholder="Enter your username..."
+              defaultValue={profile?.data?.username}
+            />
+            <Form.Input
+              name="bio"
+              placeholder="Enter your bio..."
+              defaultValue={profile?.data?.bio}
+            />
+            <Layout.Row className="justify-end">
+              <Button
+                className="btn-primary btn-lg"
+                disabled={postProfile.loading}
+              >
+                Submit
+              </Button>
+            </Layout.Row>
+          </Form>
         </Layout.Col>
-      </Layout.Container>
+      </Layout.Card>
     </Layout>
   );
 };
