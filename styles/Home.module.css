@@ -1,5 +1,5 @@
 .container{
-    @apply max-w-5xl;
+    @apply max-w-5xl px-4 lg:px-0;
 }
 .main_col{
    @apply gap-4 py-24;

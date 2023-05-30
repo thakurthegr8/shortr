@@ -33,7 +33,7 @@ const ReferenceLandingMain = () => {
           </Link>
         ))}
       </Layout.Col>
-      <Logo />
+      <Link href="/"><Logo /></Link>
     </Layout.Col>
   );
 };
