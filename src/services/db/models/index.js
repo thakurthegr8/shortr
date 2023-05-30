@@ -1,8 +1,8 @@
 import User from "./User";
 import Link from "./Link";
 import Profile from "./Profile";
-import Theme from "./Theme";
+import CustomAppearance from "./CustomAppearance";
 
-const models = { User, Link, Profile, Theme };
+const models = { User, Link, Profile, CustomAppearance };
 
 export default models;

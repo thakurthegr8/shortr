@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ThemeSchema = new mongoose.Schema({
+const CustomAppearanceSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "linkifyuser", // Reference to the User schema
@@ -44,7 +44,7 @@ const ThemeSchema = new mongoose.Schema({
   },
 });
 
-const Theme =
-  mongoose.models.linkifytheme || mongoose.model("linkifytheme", ThemeSchema);
+const CustomAppearance =
+  mongoose.models.linkify_custom_appearance || mongoose.model("linkify_custom_appearance", CustomAppearanceSchema);
 
-export default Theme;
+export default CustomAppearance;
