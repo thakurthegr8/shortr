@@ -2,14 +2,14 @@ import "react-toastify/dist/ReactToastify.css";
 import "@/styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import AuthProvider from "@/src/providers/Auth";
-import {Analytics} from "@vercel/analytics"
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
       <AuthProvider>
         <Component {...pageProps} />
-        <Analytics/>
+        <Analytics />
         <ToastContainer position="bottom-right" />
       </AuthProvider>
     </>
