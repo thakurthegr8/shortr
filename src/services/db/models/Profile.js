@@ -11,6 +11,12 @@ const ProfileSchema = new Schema(
       required: true,
       unique: true,
       trim: true,
+      validate:{
+        validator:function(name){
+          return /^[a-z0-9._]+$/.test(name)
+        },
+        message:"username should contain lowercase letters, numbers, underscores or period"
+      }
     },
     bio: {
       type: Schema.Types.String,
