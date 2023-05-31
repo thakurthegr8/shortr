@@ -33,7 +33,7 @@ const DashboardLandingPageProfile = () => {
         bio: profile.data?.bio,
       };
       const payload = compareObj(formData, currentProfileInfo);
-      if (payload) postProfile.dispatch(payload);
+      if (payload)await postProfile.dispatch(payload);
     } catch (error) {
       toast("error", { type: "error" });
       console.log(error);
@@ -72,7 +72,12 @@ const DashboardLandingPageProfile = () => {
     if (postProfile.error) {
       toast(postProfile.error, { type: "error" });
     }
-  }, [postProfile.error, postProfile.data]);
+  }, [postProfile.error]);
+  useEffect(() => {
+    if (postProfile.data) {
+      toast("Successfully updated profile", { type: "success" });
+    }
+  }, [postProfile.data]);
   return (
     <Layout>
       <Layout.Container>

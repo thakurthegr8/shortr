@@ -27,6 +27,12 @@ const POST = withSessionApi(
       if (Object.keys(error).includes("code") && error.code === 11000) {
         return res.status(400).json("username already exists");
       }
+      if (
+        Object.keys(error).includes("errors") &&
+        Object.keys(error.errors).includes("username")
+      ) {
+        return res.status(400).json(error.errors?.username?.message);
+      }
       return res.status(400).json(error);
     }
   })
@@ -37,7 +43,6 @@ const PUT = withSessionApi(
     const payload = {
       ...req.body,
     };
-    console.log(payload);
     try {
       const data = await Profile.findOneAndUpdate(
         { profile_for: req.user },
@@ -46,6 +51,16 @@ const PUT = withSessionApi(
       );
       return res.status(201).json(data);
     } catch (error) {
+      if (Object.keys(error).includes("code") && error.code === 11000) {
+        return res.status(400).json("username already exists");
+      }
+      if (
+        Object.keys(error).includes("errors") &&
+        Object.keys(error.errors).includes("username")
+      ) {
+        console.log(error.errors?.username?.message);
+        return res.status(400).json(error.errors?.username?.message);
+      }
       return res.status(400).json(error);
     }
   })
