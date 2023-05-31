@@ -24,6 +24,9 @@ const POST = withSessionApi(
       const data = await Profile.create(payload);
       return res.status(201).json(data);
     } catch (error) {
+      if (Object.keys(error).includes("code") && error.code === 11000) {
+        return res.status(400).json("username already exists");
+      }
       return res.status(400).json(error);
     }
   })
@@ -33,10 +36,14 @@ const PUT = withSessionApi(
   db(async (req, res) => {
     const payload = {
       ...req.body,
-      profile_for: req.user,
     };
+    console.log(payload);
     try {
-      const data = await Profile.findOneAndUpdate(payload);
+      const data = await Profile.findOneAndUpdate(
+        { profile_for: req.user },
+        payload,
+        { new: true }
+      );
       return res.status(201).json(data);
     } catch (error) {
       return res.status(400).json(error);

@@ -12,7 +12,7 @@ import { compareObj } from "@/src/utils/objects";
 import { profilePayloadValidator } from "@/src/utils/schemaValidators/profilePayload";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 
 const DashboardLandingPageProfile = () => {
@@ -27,7 +27,7 @@ const DashboardLandingPageProfile = () => {
 
   const onSubmit = async (formData) => {
     try {
-      await profilePayloadValidator(formData);
+      // await profilePayloadValidator(formData);
       const currentProfileInfo = {
         username: profile.data?.username,
         bio: profile.data?.bio,
@@ -67,6 +67,12 @@ const DashboardLandingPageProfile = () => {
   const handleFile = () => {
     fileRef.current.click();
   };
+
+  useEffect(() => {
+    if (postProfile.error) {
+      toast(postProfile.error, { type: "error" });
+    }
+  }, [postProfile.error, postProfile.data]);
   return (
     <Layout>
       <Layout.Container>
