@@ -1,17 +1,23 @@
 import Form from "@/src/components/utils/Form";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
+import { useCustomAppearance } from "@/src/providers/CustomAppearance";
 import React, { createContext, useContext, useState } from "react";
 
 const backgroundText = "Backgrounds";
 
 const BackgroundOptionFlatColor = (props) => {
-  const [color, setColor] = useState("#fff");
+  const customAppearance = useCustomAppearance();
+  const [color, setColor] = useState(
+    customAppearance.appearance
+      ? customAppearance.appearance.background
+      : "#000"
+  );
   const onChange = (e) => {
     setColor(e.target.value);
   };
   const onSelectingColor = (e) => {
-    console.log(e.target.value);
+    customAppearance.updateCustomAppearance.dispatch({ background: color });
   };
   return (
     <Form>
@@ -19,7 +25,7 @@ const BackgroundOptionFlatColor = (props) => {
       <Form.Input
         type="color"
         name="background"
-        className="p-4 aspect-square dark:border-none"
+        className="p-4 aspect-square dark:border-none w-full"
         value={color}
         onChange={onChange}
         onBlur={onSelectingColor}
@@ -28,27 +34,13 @@ const BackgroundOptionFlatColor = (props) => {
     </Form>
   );
 };
-const BackgroundOptionImage = (props) => {
-  return (
-    <Form>
-      <Typography.Body>Image</Typography.Body>
-      <Form.Input type="file" name="background" />
-    </Form>
-  );
-};
+
 const options = [
   {
     type: "flat",
     className: "bg-secondary dark:bg-white/10 h-36 rounded-lg",
     placeholder: "flat color",
     Option: BackgroundOptionFlatColor,
-  },
-  {
-    type: "image",
-    className:
-      "bg-[url('/assets/background-option-placeholder.png')] h-36 rounded-lg bg-cover bg-center",
-    placeholder: "image",
-    Option: BackgroundOptionImage,
   },
 ];
 const CurrentBackgroundOptionContext = createContext(null);
@@ -97,7 +89,7 @@ const CustomAppearanceBackground = () => {
   return (
     <CurrentBackgroundOptionProvider>
       <Layout.Col>
-        <Typography.Heading>{backgroundText}</Typography.Heading>
+        <Typography.Heading className="font-bold">{backgroundText}</Typography.Heading>
         <Layout.Card>
           <Layout.Grid className="grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {options.map((item) => (

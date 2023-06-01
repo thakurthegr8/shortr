@@ -10,9 +10,8 @@ import React from "react";
 const ReferenceLandingMain = () => {
   const referenceLanding = useReferenceLanding();
   const { data } = referenceLanding;
-  console.log(data);
   return (
-    <Layout.Col className="items-center justify-center py-16 gap-4">
+    <Layout.Col className="items-center justify-center py-16 gap-4 mt-16">
       <Layout>
         {data.profile.profile_for.image && (
           <Image
@@ -21,6 +20,9 @@ const ReferenceLandingMain = () => {
             width={128}
             height={128}
             className="rounded-full aspect-1/1 w-[128px] h-[128px] object-cover"
+            priority
+            unoptimized
+            alt={data.profile.username}
           />
         )}
         <Typography.Subtitle>@{data.profile.username}</Typography.Subtitle>

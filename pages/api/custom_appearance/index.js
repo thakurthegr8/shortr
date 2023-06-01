@@ -23,7 +23,16 @@ const POST = withSessionApi(
 
 const PUT = withSessionApi(
   db(async (req, res) => {
-    return res.status(200).json("PUT");
+    try {
+      const data = await CustomAppearance.findOneAndUpdate(
+        { user: req.user },
+        req.body,
+        { new: true }
+      );
+      return res.status(201).json(data);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   })
 );
 

@@ -1,4 +1,5 @@
 import CustomAppearanceBackground from "@/src/components/elements/Dashboard/Profile/CustomAppearanceBackground";
+import CustomAppearanceText from "@/src/components/elements/Dashboard/Profile/CustomAppearanceText";
 import Button from "@/src/components/utils/Button";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
@@ -13,16 +14,20 @@ const descriptionText =
 
 const CustomAppearance = () => {
   const customAppearance = useCustomAppearance();
-  console.log(customAppearance);
+  const configure = () => {
+    customAppearance.registerCustomAppearance.dispatch(null);
+  };
 
   if (!customAppearance.appearance) {
     return (
-      <Layout.Card>
-        <Layout.Col>
-          <Typography.Body>
+      <Layout.Card className="border-yellow-500 bg-yellow-50">
+        <Layout.Col className="md:flex-row md:items-center justify-between gap-4">
+          <Typography.Body className="font-medium">
             You have not configured custom appearance
           </Typography.Body>
-          <Button className="btn-primary">Configure Now</Button>
+          <Button className="btn-primary" onClick={configure}>
+            Configure Now
+          </Button>
         </Layout.Col>
       </Layout.Card>
     );
@@ -32,10 +37,11 @@ const CustomAppearance = () => {
     <Layout>
       <Layout.Col className="gap-4">
         <Layout.Col>
-          <Typography.Subtitle>{titleText}</Typography.Subtitle>
-          <Typography.Body>{descriptionText}</Typography.Body>
+          <Typography.Subtitle className="font-bold">{titleText}</Typography.Subtitle>
+          <Typography.Body className="text-secondary">{descriptionText}</Typography.Body>
         </Layout.Col>
         <CustomAppearanceBackground />
+        <CustomAppearanceText/>
       </Layout.Col>
     </Layout>
   );

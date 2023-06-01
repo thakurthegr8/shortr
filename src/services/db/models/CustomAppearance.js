@@ -8,7 +8,11 @@ const CustomAppearanceSchema = new mongoose.Schema({
   },
   background: {
     type: String,
-    default: "bg-white", // Default background color (Tailwind CSS class)
+    default: "#fff", // Default background color (Tailwind CSS class)
+  },
+  text_color: {
+    type: String,
+    default: "#000",
   },
   linkTile: {
     backgroundColor: {
@@ -45,6 +49,7 @@ const CustomAppearanceSchema = new mongoose.Schema({
 });
 
 const CustomAppearance =
-  mongoose.models.linkify_custom_appearance || mongoose.model("linkify_custom_appearance", CustomAppearanceSchema);
+  mongoose.models.linkify_custom_appearance ||
+  mongoose.model("linkify_custom_appearance", CustomAppearanceSchema);
 
 export default CustomAppearance;

@@ -6,14 +6,23 @@ import { LOGOTEXT } from "@/src/constants";
 import withUrl from "@/src/middlewares/withUrl";
 import ReferenceLandingProvider from "@/src/providers/ReferenceLanding";
 import { dbPage } from "@/src/services/db";
+import CustomAppearance from "@/src/services/db/models/CustomAppearance";
 import LinkModel from "@/src/services/db/models/Link";
 import Profile from "@/src/services/db/models/Profile";
 import React, { useMemo } from "react";
+
+const defaultBackgroundStyle = {
+  background: "#000",
+  color: "#fff",
+};
 
 const ReferenceLandingPage = (props) => {
   const payload = {
     links: JSON.parse(props.data.links),
     profile: JSON.parse(props.data.profile),
+    customAppearance: props.data.customAppearance
+      ? JSON.parse(props.data.customAppearance)
+      : null,
   };
   const metaData = useMemo(
     () => [
@@ -26,7 +35,16 @@ const ReferenceLandingPage = (props) => {
   return (
     <Page meta={metaData} page={`${LOGOTEXT} | ${payload.profile.username}`}>
       <ReferenceLandingProvider value={payload}>
-        <Layout.Col className="bg-black text-white">
+        <Layout.Col
+          style={
+            payload.customAppearance
+              ? {
+                  background: payload.customAppearance.background,
+                  color: payload.customAppearance.text_color,
+                }
+              : defaultBackgroundStyle
+          }
+        >
           <Layout.Container className="max-w-2xl min-h-screen">
             <Layout.Col>
               <ReferenceLandingNavbar />
@@ -52,11 +70,15 @@ export const getServerSideProps = withUrl(
         link_for: profile.profile_for,
         enabled: true,
       });
+      const customAppearance = await CustomAppearance.findOne({
+        user: profile.profile_for,
+      });
       return {
         props: {
           data: {
             profile: JSON.stringify(profile),
             links: JSON.stringify(links),
+            customAppearance: JSON.stringify(customAppearance),
           },
         },
       };
