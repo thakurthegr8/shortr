@@ -101,6 +101,9 @@ textarea,
 select {
   @apply bg-gray-100 dark:bg-dark_secondary outline-none p-3 rounded-lg border dark:border-white/20 border-gray-300 focus:border-general dark:focus:border-white transition-all font-semibold  text-sm;
 }
+input::-webkit-color-swatch {
+  border: none;
+}
 
 /* toast */
 

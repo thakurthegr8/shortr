@@ -4,7 +4,7 @@ export const ProfileContext = createContext(null);
 
 const ProfileProvider = (props) => {
   return (
-    <ProfileContext.Provider value={{ data:props.data }}>
+    <ProfileContext.Provider value={{ data: props.data }}>
       {props.children}
     </ProfileContext.Provider>
   );

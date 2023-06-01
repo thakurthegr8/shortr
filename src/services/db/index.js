@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import models from "./models";
+import _models from "./models";
 
 const remoteConnectionString = `mongodb+srv://${process.env.NEXT_PUBLIC_MONGOUSERNAME}:${process.env.NEXT_PUBLIC_MONGOPASSWORD}@cluster0.93tbw3c.mongodb.net/?retryWrites=true&w=majority`;
 const localConnectionString = "mongodb://localhost:27017/linkifydb";
-const connectionString =remoteConnectionString;
+const connectionString =localConnectionString;
 
 const db = (handler) => {
   return async (req, res) => {

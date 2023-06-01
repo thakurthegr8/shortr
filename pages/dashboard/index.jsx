@@ -3,8 +3,10 @@ import DashboardLandingPageDesign from "@/src/components/sections/Dashboard/Land
 import DashboardNavbar from "@/src/components/sections/Dashboard/Navbar";
 import Layout from "@/src/components/utils/Layout";
 import withSessionPage from "@/src/middlewares/withSessionPage";
+import CustomAppearanceProvider from "@/src/providers/CustomAppearance";
 import ProfileProvider from "@/src/providers/Profile";
 import { dbPage } from "@/src/services/db";
+import CustomAppearance from "@/src/services/db/models/CustomAppearance";
 import Profile from "@/src/services/db/models/Profile";
 import React from "react";
 
@@ -16,7 +18,15 @@ const Dashboard = (props) => {
           <DashboardNavbar />
           <Layout.Grid className="grid-cols-1 md:grid-cols-4 divide-x dark:divide-dark_secondary h-full">
             <Layout.Col className="col-span-2">
-              <DashboardEditLandingPage />
+              <CustomAppearanceProvider
+                appearance={
+                  props.customAppearance
+                    ? JSON.parse(props.customAppearance)
+                    : null
+                }
+              >
+                <DashboardEditLandingPage />
+              </CustomAppearanceProvider>
             </Layout.Col>
             <Layout.Col className="hidden md:block">
               <DashboardLandingPageDesign />
@@ -33,7 +43,15 @@ export default Dashboard;
 export const getServerSideProps = withSessionPage(
   dbPage(async (ctx) => {
     const profile = await Profile.findOne({ profile_for: ctx.req.user });
+    const customAppearance = await CustomAppearance.findOne({
+      user: ctx.req.user,
+    });
     console.log();
-    return { props: { data: JSON.stringify(profile) } };
+    return {
+      props: {
+        data: JSON.stringify(profile),
+        customAppearance: JSON.stringify(customAppearance),
+      },
+    };
   })
 );

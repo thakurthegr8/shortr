@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
     <>
       <AuthProvider>
         <Component {...pageProps} />
-        <Analytics />
+        {/* <Analytics /> */}
         <ToastContainer position="bottom-right" />
       </AuthProvider>
     </>
