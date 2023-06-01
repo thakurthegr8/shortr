@@ -12,7 +12,7 @@ import { compareObj } from "@/src/utils/objects";
 import { profilePayloadValidator } from "@/src/utils/schemaValidators/profilePayload";
 import UserIcon from "@heroicons/react/24/outline/UserIcon";
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 
 const DashboardLandingPageProfile = () => {
@@ -27,13 +27,13 @@ const DashboardLandingPageProfile = () => {
 
   const onSubmit = async (formData) => {
     try {
-      await profilePayloadValidator(formData);
+      // await profilePayloadValidator(formData);
       const currentProfileInfo = {
         username: profile.data?.username,
         bio: profile.data?.bio,
       };
       const payload = compareObj(formData, currentProfileInfo);
-      if (payload) postProfile.dispatch(payload);
+      if (payload)await postProfile.dispatch(payload);
     } catch (error) {
       toast("error", { type: "error" });
       console.log(error);
@@ -67,6 +67,17 @@ const DashboardLandingPageProfile = () => {
   const handleFile = () => {
     fileRef.current.click();
   };
+
+  useEffect(() => {
+    if (postProfile.error) {
+      toast(postProfile.error, { type: "error" });
+    }
+  }, [postProfile.error]);
+  useEffect(() => {
+    if (postProfile.data) {
+      toast("Successfully updated profile", { type: "success" });
+    }
+  }, [postProfile.data]);
   return (
     <Layout>
       <Typography.Subtitle className="font-semibold">
