@@ -1,4 +1,5 @@
 import CustomAppearanceBackground from "@/src/components/elements/Dashboard/Profile/CustomAppearanceBackground";
+import CustomAppearanceLink from "@/src/components/elements/Dashboard/Profile/CustomAppearanceLink";
 import CustomAppearanceText from "@/src/components/elements/Dashboard/Profile/CustomAppearanceText";
 import Button from "@/src/components/utils/Button";
 import Layout from "@/src/components/utils/Layout";
@@ -42,6 +43,7 @@ const CustomAppearance = () => {
         </Layout.Col>
         <CustomAppearanceBackground />
         <CustomAppearanceText/>
+        <CustomAppearanceLink/>
       </Layout.Col>
     </Layout>
   );
