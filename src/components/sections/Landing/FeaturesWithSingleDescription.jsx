@@ -70,7 +70,7 @@ const FeaturesWithSingleDescription = () => {
           >
             <Layout.Card className="h-full w-full">
               <Layout.Col className="items-center justify-center h-full">
-                <Typography.Title className="text-7xl animate-bounce">
+                <Typography.Title className="text-7xl">
                   {item.emoji}
                 </Typography.Title>
               </Layout.Col>
