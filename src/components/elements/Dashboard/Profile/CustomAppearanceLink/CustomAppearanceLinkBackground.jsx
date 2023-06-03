@@ -4,24 +4,25 @@ import Typography from "@/src/components/utils/Typography";
 import { useCustomAppearance } from "@/src/providers/CustomAppearance";
 import React, { useState } from "react";
 
-const textText = "Text";
+const textText = "Background";
 
 const TextOptionFlatColor = (props) => {
   const customAppearance = useCustomAppearance();
   const [color, setColor] = useState(
     customAppearance.appearance
-      ? customAppearance.appearance.text_color
+      ? customAppearance.appearance.linkTile.backgroundColor
       : "#000"
   );
   const onChange = (e) => {
     setColor(e.target.value);
   };
   const onSelectingColor = (e) => {
-    customAppearance.updateCustomAppearance.dispatch({ text_color: color });
+    customAppearance.updateCustomAppearance.dispatch({"linkTile.backgroundColor": color },
+    );
   };
   return (
     <Form>
-      <Typography.Body>Color</Typography.Body>
+      <Typography.Body>Background</Typography.Body>
       <Form.Input
         type="color"
         name="Text"
@@ -35,15 +36,12 @@ const TextOptionFlatColor = (props) => {
   );
 };
 
-const CustomAppearanceText = () => {
+const CustomAppearanceLinkBackground = () => {
   return (
     <Layout.Col>
-      <Typography.Heading className="font-bold">{textText}</Typography.Heading>
-      <Layout.Card>
-        <TextOptionFlatColor />
-      </Layout.Card>
+      <TextOptionFlatColor />
     </Layout.Col>
   );
 };
 
-export default CustomAppearanceText;
+export default CustomAppearanceLinkBackground;

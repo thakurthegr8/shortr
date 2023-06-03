@@ -25,7 +25,7 @@ const BackgroundOptionFlatColor = (props) => {
       <Form.Input
         type="color"
         name="background"
-        className="p-4 aspect-square dark:border-none w-full"
+        className="p-4 aspect-square dark:border-none"
         value={color}
         onChange={onChange}
         onBlur={onSelectingColor}

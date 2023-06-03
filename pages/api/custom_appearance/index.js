@@ -26,7 +26,7 @@ const PUT = withSessionApi(
     try {
       const data = await CustomAppearance.findOneAndUpdate(
         { user: req.user },
-        req.body,
+        { $set: req.body },
         { new: true }
       );
       return res.status(201).json(data);

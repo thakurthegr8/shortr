@@ -4,6 +4,9 @@ import React from "react";
 import CustomAppearanceLinkFill from "./CustomAppearanceLinkFill";
 import CustomAppearanceLinkOutlined from "./CustomAppearanceOutlined";
 import CustomAppearanceLinkSoftShadow from "./CustomAppearanceLinkSoftShadow";
+import CustomAppearanceLinkHardShadow from "./CustomAppearanceLinkHardShadow";
+import CustomAppearanceLinkBackground from "./CustomAppearanceLinkBackground";
+import CustomAppearanceLinkText from "./CustomAppearanceLinkText";
 
 const CustomAppearanceLink = () => {
   return <Layout>
@@ -13,6 +16,9 @@ const CustomAppearanceLink = () => {
             <CustomAppearanceLinkFill/>
             <CustomAppearanceLinkOutlined/>
             <CustomAppearanceLinkSoftShadow/>
+            <CustomAppearanceLinkHardShadow/>
+            <CustomAppearanceLinkBackground/>
+            <CustomAppearanceLinkText/>
         </Layout.Col>
     </Layout.Card>
   </Layout>;

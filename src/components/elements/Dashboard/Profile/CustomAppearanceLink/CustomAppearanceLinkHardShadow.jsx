@@ -5,58 +5,57 @@ import React from "react";
 
 const options = [
   {
-    id: "fill_1",
+    id: "outline_1",
     className: "rounded-none",
     payload: {
       "linkTile.roundness": "rounded-none",
+      "linkTile.softShadow": false,
+      "linkTile.hardShadow": true,
       "linkTile.outline": "outline-none",
-      "linkTile.hardShadow":false,
-      "linkTile.softShadow":false
     },
   },
   {
-    id: "fill_2",
+    id: "outline_2",
     className: "rounded-md",
     payload: {
       "linkTile.roundness": "rounded-md",
+      "linkTile.softShadow": false,
+      "linkTile.hardShadow": true,
       "linkTile.outline": "outline-none",
-      "linkTile.hardShadow":false,
-      "linkTile.softShadow":false
     },
   },
   {
-    id: "fill_3",
+    id: "outline_3",
     className: "rounded-full",
     payload: {
       "linkTile.roundness": "rounded-full",
+      "linkTile.softShadow": false,
+      "linkTile.hardShadow": true,
       "linkTile.outline": "outline-none",
-      "linkTile.hardShadow":false,
-      "linkTile.softShadow":false
     },
   },
 ];
 
-const CustomAppearanceLinkFill = () => {
+const CustomAppearanceLinkHardShadow = () => {
   const customAppearance = useCustomAppearance();
   const update = (payload) => {
-   
+    
     customAppearance.updateCustomAppearance.dispatch(payload);
   };
   return (
     <Layout.Col className="gap-2">
-      <Typography.Body>Fill</Typography.Body>
+      <Typography.Body>Hard Shadow</Typography.Body>
       <Layout.Grid className="grid-cols-2 lg:grid-cols-3 gap-4">
         {options.map((item) => (
           <Layout.Col
             onClick={(e) => update(item.payload)}
             key={item.id}
-            className={`h-8 bg-black dark:bg-white ${item.className} ${
+            className={`h-8 neu-bg ${item.className} ${
               customAppearance.appearance.linkTile.roundness ===
                 item.payload["linkTile.roundness"] &&
-              customAppearance.appearance.linkTile.outline === "outline-none" &&
-              !customAppearance.appearance.linkTile.softShadow && !customAppearance.appearance.linkTile.hardShadow
-                ? "ring-2 ring-primary ring-offset-2"
-                : ""
+              customAppearance.appearance.linkTile.hardShadow
+                ? "neu-bg-primary"
+                : "neu-bg-general"
             }`}
           ></Layout.Col>
         ))}
@@ -65,4 +64,4 @@ const CustomAppearanceLinkFill = () => {
   );
 };
 
-export default CustomAppearanceLinkFill;
+export default CustomAppearanceLinkHardShadow;

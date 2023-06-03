@@ -8,24 +8,30 @@ const options = [
     id: "outline_1",
     className: "rounded-none",
     payload: {
-      roundness: "rounded-none",
-      outline: "outline",
+      "linkTile.roundness": "rounded-none",
+      "linkTile.outline": "outline",
+      "linkTile.hardShadow":false,
+      "linkTile.softShadow":false
     },
   },
   {
     id: "outline_2",
     className: "rounded-md",
     payload: {
-      roundness: "rounded-md",
-      outline: "outline",
+      "linkTile.roundness": "rounded-md",
+      "linkTile.outline": "outline",
+      "linkTile.hardShadow":false,
+      "linkTile.softShadow":false
     },
   },
   {
     id: "outline_3",
     className: "rounded-full",
     payload: {
-      roundness: "rounded-full",
-      outline: "outline",
+      "linkTile.roundness": "rounded-full",
+      "linkTile.outline": "outline",
+      "linkTile.hardShadow":false,
+      "linkTile.softShadow":false
     },
   },
 ];
@@ -38,7 +44,7 @@ const CustomAppearanceLinkOutlined = () => {
         ...payload,
       },
     };
-    customAppearance.updateCustomAppearance.dispatch(linkTilePayload);
+    customAppearance.updateCustomAppearance.dispatch(payload);
   };
   return (
     <Layout.Col className="gap-2">
@@ -48,11 +54,12 @@ const CustomAppearanceLinkOutlined = () => {
           <Layout.Col
             onClick={(e) => update(item.payload)}
             key={item.id}
-            className={`h-8 bg-transparent border ${item.className} ${
+            className={`h-8 bg-transparent border border-black dark:border-white ${
+              item.className
+            } ${
               customAppearance.appearance.linkTile.roundness ===
-                item.payload.roundness &&
-              customAppearance.appearance.linkTile.outline ===
-                item.payload.outline
+                item.payload["linkTile.roundness"] &&
+              customAppearance.appearance.linkTile.outline ==="outline"
                 ? "ring-1 ring-primary ring-offset-2 ring-offset-transparent"
                 : ""
             }`}

@@ -8,27 +8,30 @@ const options = [
     id: "outline_1",
     className: "rounded-none",
     payload: {
-      roundness: "rounded-none",
-      softShadow: true,
-      outline:"outline-none"
+      "linkTile.roundness": "rounded-none",
+      "linkTile.softShadow": true,
+      "linkTile.hardShadow": false,
+      "linkTile.outline": "outline-none",
     },
   },
   {
     id: "outline_2",
     className: "rounded-md",
     payload: {
-      roundness: "rounded-md",
-      softShadow: true,
-      outline:"outline-none"
+      "linkTile.roundness": "rounded-md",
+      "linkTile.softShadow": true,
+      "linkTile.hardShadow": false,
+      "linkTile.outline": "outline-none",
     },
   },
   {
     id: "outline_3",
     className: "rounded-full",
     payload: {
-      roundness: "rounded-full",
-      softShadow: true,
-      outline:"outline-none"
+      "linkTile.roundness": "rounded-full",
+      "linkTile.softShadow": true,
+      "linkTile.hardShadow": false,
+      "linkTile.outline": "outline-none",
     },
   },
 ];
@@ -36,12 +39,8 @@ const options = [
 const CustomAppearanceLinkSoftShadow = () => {
   const customAppearance = useCustomAppearance();
   const update = (payload) => {
-    const linkTilePayload = {
-      linkTile: {
-        ...payload,
-      },
-    };
-    customAppearance.updateCustomAppearance.dispatch(linkTilePayload);
+   
+    customAppearance.updateCustomAppearance.dispatch(payload);
   };
   return (
     <Layout.Col className="gap-2">
@@ -51,9 +50,9 @@ const CustomAppearanceLinkSoftShadow = () => {
           <Layout.Col
             onClick={(e) => update(item.payload)}
             key={item.id}
-            className={`h-8 bg-transparent shadow-md shadow-white ${item.className} ${
+            className={`h-8 bg-transparent shadow-lg border border-black dark:border-white  dark:shadow-white ${item.className} ${
               customAppearance.appearance.linkTile.roundness ===
-                item.payload.roundness &&
+              item.payload["linkTile.roundness"] &&
               customAppearance.appearance.linkTile.softShadow
                 ? "ring-1 ring-primary ring-offset-2 ring-offset-transparent"
                 : ""
