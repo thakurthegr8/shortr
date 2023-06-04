@@ -6,12 +6,49 @@ import { useReferenceLanding } from "@/src/providers/ReferenceLanding";
 import { imageLoader } from "@/src/utils/image";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 
 const ReferenceLandingMain = () => {
   const referenceLanding = useReferenceLanding();
   const { data } = referenceLanding;
-  console.log(referenceLanding);
+
+  const isHardShadow = useMemo(() => {
+    return data?.customAppearance?.linkTile?.hardShadow
+      ? "neu-ref-landing border-2 border-black"
+      : "";
+  }, []);
+  const isSoftShadow = useMemo(() => {
+    return data?.customAppearance?.linkTile?.softShadow
+      ? "shadow-xl border-black border-2"
+      : "";
+  }, []);
+  const isOutlined = useMemo(() => {
+    return data?.customAppearance?.linkTile?.outline
+      ? "border border-white bg-transparent"
+      : "";
+  }, []);
+
+  const isRounded = useMemo(() => {
+    return data?.customAppearance?.linkTile?.roundness
+      ? data?.customAppearance?.linkTile?.roundness
+      : "";
+  }, []);
+
+  const hasFontColor = useMemo(() => {
+    return data?.customAppearance?.linkTile?.fontColor
+      ? data?.customAppearance?.linkTile?.fontColor
+      : "#fff";
+  }, []);
+  const hasBackground = useMemo(() => {
+    if (!data?.customAppearance) {
+      return "#000";
+    }
+    if (data?.customAppearance?.linkTile?.outline) {
+      return "transparent";
+    }
+    return data?.customAppearance?.linkTile?.backgroundColor;
+  }, []);
+
   return (
     <Layout.Col className="items-center justify-center py-16 gap-4 mt-16">
       <Layout>
@@ -36,32 +73,10 @@ const ReferenceLandingMain = () => {
             key={index}
             href={item.value}
             target="blank"
-            className={`capitalize p-4 w-full text-center ${
-              data?.customAppearance?.linkTile?.hardShadow
-                ? "neu-bg shadow-black border-2 border-black"
-                : ""
-            } ${
-              data?.customAppearance?.linkTile?.softShadow
-                ? "shadow-xl border-black border-2"
-                : ""
-            } ${
-              data?.customAppearance?.linkTile?.outline === "outline"
-                ? "border bg-transparent"
-                : ""
-            } ${
-              data?.customAppearance?.linkTile?.roundness
-                ? data?.customAppearance?.linkTile?.roundness
-                : ""
-            }`}
+            className={`hover:scale-95 active:scale-90 font-medium transition-all capitalize p-4 w-full text-center ${isHardShadow} ${isSoftShadow} ${isOutlined} ${isRounded}`}
             style={{
-              color: data?.customAppearance?.linkTile?.fontColor
-                ? data?.customAppearance?.linkTile?.fontColor
-                : "#000",
-              background:
-                data?.customAppearance?.linkTile?.backgroundColor &&
-                data?.customAppearance?.linkTile?.outline !== "outline"
-                  ? data?.customAppearance?.linkTile?.backgroundColor
-                  : "transparent",
+              color: hasFontColor,
+              background: hasBackground,
             }}
           >
             {item.title}

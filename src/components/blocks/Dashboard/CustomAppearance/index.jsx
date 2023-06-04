@@ -39,7 +39,7 @@ const CustomAppearance = () => {
       <Layout.Col className="gap-4">
         <Layout.Col>
           <Typography.Subtitle className="font-bold">{titleText}</Typography.Subtitle>
-          <Typography.Body className="text-secondary">{descriptionText}</Typography.Body>
+          <Typography.Body className="text-black dark:text-secondary">{descriptionText}</Typography.Body>
         </Layout.Col>
         <CustomAppearanceBackground />
         <CustomAppearanceText/>

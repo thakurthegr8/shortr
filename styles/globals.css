@@ -123,4 +123,8 @@ input::-webkit-color-swatch {
   @apply border border-primary shadow-primary dark:shadow-primary;
 }
 
+.neu-ref-landing{
+  box-shadow:0.25rem 0.25rem 0px #000000;
+}
+
 

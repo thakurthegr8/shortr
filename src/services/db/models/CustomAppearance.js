@@ -7,33 +7,41 @@ const CustomAppearanceSchema = new mongoose.Schema({
     required: true,
   },
   background: {
-    type: String,
+    type: mongoose.Schema.Types.String,
+    default: "#000000",
   },
   text_color: {
-    type: String,
+    type: mongoose.Schema.Types.String,
+    default: "#ffffff",
   },
   linkTile: {
     backgroundColor: {
-      type: String,
-    },
-    textColor: {
-      type: String,
+      type: mongoose.Schema.Types.String,
+      default: "#ffffff",
     },
     roundness: {
-      type: String,
+      type: mongoose.Schema.Types.String,
+      default: "rounded-none",
     },
     hardShadow: {
-      type: Boolean,
+      type: mongoose.Schema.Types.Boolean,
       default: false, // Default value for hard shadow
     },
     softShadow: {
-      type: Boolean,
+      type: mongoose.Schema.Types.Boolean,
+      default: false,
     },
     outline: {
-      type: String,
+      type: mongoose.Schema.Types.Boolean,
+      default: false,
     },
     fontColor: {
-      type: String,
+      type: mongoose.Schema.Types.String,
+      default: "#000000",
+    },
+    shadowColor: {
+      type: mongoose.Schema.Types.String,
+      default: "#000000",
     },
   },
 });

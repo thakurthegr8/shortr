@@ -1,10 +1,9 @@
+import React, { useState } from "react";
 import Form from "@/src/components/utils/Form";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
 import { useCustomAppearance } from "@/src/providers/CustomAppearance";
-import React, { useState } from "react";
 
-const textText = "Text";
 
 const TextOptionFlatColor = (props) => {
   const customAppearance = useCustomAppearance();
@@ -13,9 +12,11 @@ const TextOptionFlatColor = (props) => {
       ? customAppearance.appearance.linkTile.fontColor
       : "#000"
   );
+
   const onChange = (e) => {
     setColor(e.target.value);
   };
+
   const onSelectingColor = (e) => {
     customAppearance.updateCustomAppearance.dispatch({
       "linkTile.fontColor": color,
