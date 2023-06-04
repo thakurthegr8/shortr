@@ -7,44 +7,42 @@ const CustomAppearanceSchema = new mongoose.Schema({
     required: true,
   },
   background: {
-    type: String,
-    default: "#fff", // Default background color (Tailwind CSS class)
+    type: mongoose.Schema.Types.String,
+    default: "#000000",
   },
   text_color: {
-    type: String,
-    default: "#000",
+    type: mongoose.Schema.Types.String,
+    default: "#ffffff",
   },
   linkTile: {
     backgroundColor: {
-      type: String,
-      default: "bg-gray-200", // Default link tile background color (Tailwind CSS class)
-    },
-    textColor: {
-      type: String,
-      default: "text-gray-800", // Default link tile text color (Tailwind CSS class)
+      type: mongoose.Schema.Types.String,
+      default: "#ffffff",
     },
     roundness: {
-      type: String,
-      enum: ["rounded", "rounded-md", "rounded-lg", "rounded-none"],
-      default: "rounded", // Default roundness level for link tiles
+      type: mongoose.Schema.Types.String,
+      default: "rounded-none",
     },
     hardShadow: {
-      type: Boolean,
+      type: mongoose.Schema.Types.Boolean,
       default: false, // Default value for hard shadow
     },
     softShadow: {
-      type: Boolean,
-      default: false, // Default value for soft shadow
+      type: mongoose.Schema.Types.Boolean,
+      default: false,
     },
     outline: {
-      type: String,
-      default: "outline-none", // Default outline style for link tiles (Tailwind CSS class)
+      type: mongoose.Schema.Types.Boolean,
+      default: false,
     },
     fontColor: {
-      type: String,
-      default: "text-gray-800", // Default font color for link tiles (Tailwind CSS class)
+      type: mongoose.Schema.Types.String,
+      default: "#000000",
     },
-    // Add more styling properties as needed
+    shadowColor: {
+      type: mongoose.Schema.Types.String,
+      default: "#000000",
+    },
   },
 });
 

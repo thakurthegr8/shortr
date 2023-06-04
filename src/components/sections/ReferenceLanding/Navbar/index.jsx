@@ -18,7 +18,7 @@ const ReferenceLandingNavbar = () => {
   };
   return (
     <Layout.Row className=" fixed left-0 top-0 right-0 py-2 px-4 md:px-0">
-      <Layout.Container className="max-w-2xl backdrop-blur bg-white bg-opacity-20 rounded-full border overflow-hidden border-white px-0">
+      <Layout.Container className="max-w-xl backdrop-blur bg-white bg-opacity-20 rounded-full border overflow-hidden border-white px-0">
         <Layout.Row className="p-2 md:p-4 items-center justify-between">
           {data.profile.profile_for.image ? (
             <Image

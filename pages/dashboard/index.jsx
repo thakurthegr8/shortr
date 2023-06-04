@@ -1,4 +1,4 @@
-import DashboardEditLandingPage from "@/src/components/sections/Dashboard/EditLandingPage";
+// import DashboardEditLandingPage from "@/src/components/sections/Dashboard/EditLandingPage";
 import DashboardLandingPageDesign from "@/src/components/sections/Dashboard/LandingPageDesign";
 import DashboardNavbar from "@/src/components/sections/Dashboard/Navbar";
 import Layout from "@/src/components/utils/Layout";
@@ -8,7 +8,18 @@ import ProfileProvider from "@/src/providers/Profile";
 import { dbPage } from "@/src/services/db";
 import CustomAppearance from "@/src/services/db/models/CustomAppearance";
 import Profile from "@/src/services/db/models/Profile";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const DashboardEditLandingPage = dynamic(
+  () =>
+    import("@/src/components/sections/Dashboard/EditLandingPage").then(
+      (mod) => mod.default
+    ),
+  {
+    ssr: false,
+  }
+);
 
 const Dashboard = (props) => {
   return (

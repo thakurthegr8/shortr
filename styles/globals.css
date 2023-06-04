@@ -110,3 +110,21 @@ input::-webkit-color-swatch {
 .Toastify__toast {
   @apply text-sm p-1 capitalize;
 }
+
+/* neubrutalism */
+.neu-bg{
+  box-shadow:0.25rem 0.25rem 0px;
+
+}
+.neu-bg-general{
+  @apply border  border-secondary dark:border-white/30 shadow-secondary dark:shadow-white/30;
+}
+.neu-bg-primary{
+  @apply border border-primary shadow-primary dark:shadow-primary;
+}
+
+.neu-ref-landing{
+  box-shadow:0.25rem 0.25rem 0px #000000;
+}
+
+

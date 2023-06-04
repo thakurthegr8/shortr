@@ -1,23 +1,26 @@
+import React, { useState } from "react";
 import Form from "@/src/components/utils/Form";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
 import { useCustomAppearance } from "@/src/providers/CustomAppearance";
-import React, { useState } from "react";
 
-const textText = "Text";
 
 const TextOptionFlatColor = (props) => {
   const customAppearance = useCustomAppearance();
   const [color, setColor] = useState(
     customAppearance.appearance
-      ? customAppearance.appearance.text_color
+      ? customAppearance.appearance.linkTile.fontColor
       : "#000"
   );
+
   const onChange = (e) => {
     setColor(e.target.value);
   };
+
   const onSelectingColor = (e) => {
-    customAppearance.updateCustomAppearance.dispatch({ text_color: color });
+    customAppearance.updateCustomAppearance.dispatch({
+      "linkTile.fontColor": color,
+    });
   };
   return (
     <Form>
@@ -35,15 +38,12 @@ const TextOptionFlatColor = (props) => {
   );
 };
 
-const CustomAppearanceText = () => {
+const CustomAppearanceLinkText = () => {
   return (
     <Layout.Col>
-      <Typography.Heading className="font-bold">{textText}</Typography.Heading>
-      <Layout.Card>
-        <TextOptionFlatColor />
-      </Layout.Card>
+      <TextOptionFlatColor />
     </Layout.Col>
   );
 };
 
-export default CustomAppearanceText;
+export default CustomAppearanceLinkText;

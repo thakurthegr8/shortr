@@ -32,20 +32,22 @@ const ReferenceLandingPage = (props) => {
     ],
     []
   );
+
+  const backgroundStyle = ()=>{
+    return  payload.customAppearance
+    ? {
+        background: payload.customAppearance.background,
+        color: payload.customAppearance.text_color,
+      }
+    : defaultBackgroundStyle
+}
+  
   return (
     <Page meta={metaData} page={`${LOGOTEXT} | ${payload.profile.username}`}>
       <ReferenceLandingProvider value={payload}>
         <Layout.Col
-          style={
-            payload.customAppearance
-              ? {
-                  background: payload.customAppearance.background,
-                  color: payload.customAppearance.text_color,
-                }
-              : defaultBackgroundStyle
-          }
-        >
-          <Layout.Container className="max-w-2xl min-h-screen">
+          style={backgroundStyle()}>
+          <Layout.Container className="max-w-xl min-h-screen">
             <Layout.Col>
               <ReferenceLandingNavbar />
               <ReferenceLandingMain />

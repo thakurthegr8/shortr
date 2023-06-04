@@ -1,4 +1,5 @@
 import CustomAppearanceBackground from "@/src/components/elements/Dashboard/Profile/CustomAppearanceBackground";
+import CustomAppearanceLink from "@/src/components/elements/Dashboard/Profile/CustomAppearanceLink";
 import CustomAppearanceText from "@/src/components/elements/Dashboard/Profile/CustomAppearanceText";
 import Button from "@/src/components/utils/Button";
 import Layout from "@/src/components/utils/Layout";
@@ -38,10 +39,11 @@ const CustomAppearance = () => {
       <Layout.Col className="gap-4">
         <Layout.Col>
           <Typography.Subtitle className="font-bold">{titleText}</Typography.Subtitle>
-          <Typography.Body className="text-secondary">{descriptionText}</Typography.Body>
+          <Typography.Body className="text-black dark:text-secondary">{descriptionText}</Typography.Body>
         </Layout.Col>
         <CustomAppearanceBackground />
         <CustomAppearanceText/>
+        <CustomAppearanceLink/>
       </Layout.Col>
     </Layout>
   );
