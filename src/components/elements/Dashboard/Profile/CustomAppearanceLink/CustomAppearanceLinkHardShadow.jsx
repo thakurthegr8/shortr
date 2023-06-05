@@ -27,10 +27,10 @@ const CustomAppearanceLinkHardShadow = () => {
     <Layout.Col className="gap-2">
       <Typography.Body>Hard Shadow</Typography.Body>
       <Layout.Grid className="grid-cols-2 lg:grid-cols-3 gap-4">
-        {customAppearanceLinkOptions.map((item) => (
+        {customAppearanceLinkOptions.map((item,index) => (
           <Layout.Col
             onClick={(e) => update(item.payload)}
-            key={`hard_shadow_${item.id}`}
+            key={`hard_shadow_${index}`}
             className={`h-8 neu-bg ${item.className} ${selectedOption(
               item.payload["linkTile.roundness"]
             )}`}

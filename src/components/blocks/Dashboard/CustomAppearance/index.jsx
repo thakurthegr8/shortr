@@ -5,8 +5,6 @@ import Button from "@/src/components/utils/Button";
 import Layout from "@/src/components/utils/Layout";
 import Typography from "@/src/components/utils/Typography";
 import { useCustomAppearance } from "@/src/providers/CustomAppearance";
-import { useProfile } from "@/src/providers/Profile";
-import Link from "next/link";
 import React from "react";
 
 const titleText = "Custom Appearance";
