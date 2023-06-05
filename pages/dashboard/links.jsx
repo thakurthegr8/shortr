@@ -14,12 +14,9 @@ const DashboardLinks = (props) => {
       <Layout>
         <Layout.Col className="h-screen">
           <DashboardNavbar />
-          <Layout.Grid className="grid-cols-1 md:grid-cols-4 divide-x dark:divide-dark_secondary h-full">
-            <Layout.Col className="col-span-2">
+          <Layout.Grid className="grid-cols-1 lg:grid-cols-4 divide-x dark:divide-dark_secondary h-full">
+            <Layout.Col className="col-span-2 py-36 md:py-24">
               <EditLandingPageLinks />
-            </Layout.Col>
-            <Layout.Col className="hidden md:block">
-              <DashboardLandingPageDesign />
             </Layout.Col>
           </Layout.Grid>
         </Layout.Col>

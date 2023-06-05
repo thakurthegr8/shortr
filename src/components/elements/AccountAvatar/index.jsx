@@ -51,7 +51,7 @@ const AccountAvatar = () => {
                     width={50}
                     height={50}
                     loader={imageLoader}
-                    className="bg-general rounded-full aspect-square object-cover object-cover"
+                    className="bg-general rounded-full aspect-square object-cover"
                   />
                 ) : (
                   <Avatar name={name} />

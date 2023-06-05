@@ -31,17 +31,17 @@ const ReferenceLandingMain = () => {
   const isRounded = useMemo(() => {
     return data?.customAppearance?.linkTile?.roundness
       ? data?.customAppearance?.linkTile?.roundness
-      : "";
+      : "rounded-md";
   }, []);
 
   const hasFontColor = useMemo(() => {
     return data?.customAppearance?.linkTile?.fontColor
       ? data?.customAppearance?.linkTile?.fontColor
-      : "#fff";
+      : "#000";
   }, []);
   const hasBackground = useMemo(() => {
     if (!data?.customAppearance) {
-      return "#000";
+      return "#fff";
     }
     if (data?.customAppearance?.linkTile?.outline) {
       return "transparent";

@@ -7,7 +7,7 @@ const DashboardEditLandingPage = () => {
   return (
     <Layout>
       <Layout.Container>
-        <Layout.Col className="py-4 px-2 md:py-16 md:px-16 gap-8">
+        <Layout.Col className="py-4 px-2 md:px-8 lg:px-16 gap-4">
           <DashboardLandingPageProfile />
           <CustomAppearance />
         </Layout.Col>

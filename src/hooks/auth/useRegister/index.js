@@ -20,7 +20,7 @@ const useRegister = () => {
       setLoading(true);
       const res = await axios.post("/api/auth/register", updatedPayload);
       const responseData = await res.data;
-      if (res.status === 200) {
+      if (res.status === 201) {
         setData(responseData);
         toast("successfully registered", { type: "success" });
         router.push("/");
