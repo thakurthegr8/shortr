@@ -65,7 +65,7 @@ const DashboardLandingPageDesign = () => {
       className="w-full lg:max-w-xs h-full lg:mt-32 lg:mb-12"
       style={{ background: hasBackground, color: hasTextColor }}
     >
-      <Layout.Col className="items-center py-8 gap-2 ">
+      <Layout.Col className="items-center py-8 gap-2 px-2 ">
         {auth?.data?.image ? (
           <Image
             src={auth?.data?.image?.url}
@@ -83,7 +83,7 @@ const DashboardLandingPageDesign = () => {
         <Typography.Body className="font-bold">
           @{profile.data?.username}
         </Typography.Body>
-        <Typography.Caption>{profile.data?.bio}</Typography.Caption>
+        <Typography.Caption className="text-center">{profile.data?.bio}</Typography.Caption>
         <Layout.Col className="px-4 w-full items-center gap-4">
           <Typography.Body
             className={`font-medium hover:scale-95 active:scale-90 transition-all capitalize p-2 w-full text-center ${isHardShadow} ${isSoftShadow} ${isOutlined} ${isRounded}`}

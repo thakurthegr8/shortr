@@ -15,7 +15,7 @@ import styles from "@/styles/Home.module.css";
 import FeaturesWithSingleDescription from "@/src/components/sections/Landing/FeaturesWithSingleDescription";
 import Footer from "@/src/components/sections/Landing/Footer";
 
-const Home = (props) => {
+const Home = (_props) => {
   return (
     <Page meta={METADATA}>
       <Layout.Container className={styles.container}>

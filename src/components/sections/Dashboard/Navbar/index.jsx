@@ -43,7 +43,7 @@ const DashboardNavbar = () => {
   }
   return (
     <Layout>
-      <Layout.Col className="py-3 px-4 border-b dark:border-white/20 divide-y dark:divide-none gap-2 bg-white dark:bg-general fixed right-0 left-0 lg:z-40">
+      <Layout.Col className="py-3 px-4 border-b dark:border-white/20 divide-y dark:divide-none gap-2 bg-white dark:bg-general fixed right-0 left-0 z-10 lg:z-40">
         <Layout.Row className="justify-between items-center">
           <Layout.Row className="gap-2 items-center">
             <Link href="/">

@@ -13,6 +13,8 @@ import { dbPage } from "@/src/services/db";
 import CustomAppearance from "@/src/services/db/models/CustomAppearance";
 import Profile from "@/src/services/db/models/Profile";
 import { Suspense } from "react";
+import Page from "@/src/components/pages";
+import { LOGOTEXT } from "@/src/constants";
 
 const DashboardEditLandingPage = dynamic(
   () =>
@@ -43,37 +45,38 @@ const TogglePreview = (props) => {
 const Dashboard = (props) => {
   const [isPreviewOpened, setPreviewOpen] = useState(false);
   return (
-    <ProfileProvider data={JSON.parse(props.data)}>
-      <Layout>
-        <Layout.Col className="h-screen">
-          <DashboardNavbar />
-          <CustomAppearanceProvider
-            appearance={
-              props.customAppearance ? JSON.parse(props.customAppearance) : null
-            }
-          >
-            <Layout.Grid className="grid-cols-1 lg:grid-cols-4 divide-x dark:divide-dark_secondary h-full">
-              <Layout.Col className="col-span-2 py-36 lg:py-24">
-                <Suspense fallback={<>loading</>}>
-                  <DashboardEditLandingPage />
-                </Suspense>
-              </Layout.Col>
-              <Layout.Col
-                className={`${
-                  isPreviewOpened ? "block" : "hidden"
-                } left-0 z-10 lg:flex col-span-2 fixed overflow top-0  bottom-0 lg:left-[50%]  right-0`}
-              >
-                <DashboardLandingPageDesign />
-              </Layout.Col>
-            </Layout.Grid>
-          </CustomAppearanceProvider>
-        </Layout.Col>
-      </Layout>
-      <TogglePreview
-        isPreviewOpened={isPreviewOpened}
-        setPreviewOpen={setPreviewOpen}
-      />
-    </ProfileProvider>
+    <Page page={`${LOGOTEXT} | Dashboard`}>
+      <ProfileProvider data={JSON.parse(props.data)}>
+        <Layout>
+          <Layout.Col className="h-screen">
+            <DashboardNavbar />
+            <CustomAppearanceProvider
+              appearance={
+                props.customAppearance ? JSON.parse(props.customAppearance) : null
+              }
+            >
+              <Layout.Grid className="grid-cols-1 lg:grid-cols-4 divide-x dark:divide-dark_secondary h-full">
+                <Layout.Col className="col-span-2 py-36 lg:py-24">
+                  <Suspense fallback={<>loading</>}>
+                    <DashboardEditLandingPage />
+                  </Suspense>
+                </Layout.Col>
+                <Layout.Col
+                  className={`${isPreviewOpened ? "block" : "hidden"
+                    } left-0 z-10 lg:flex col-span-2 fixed overflow top-0  bottom-0 lg:left-[50%]  right-0`}
+                >
+                  <DashboardLandingPageDesign />
+                </Layout.Col>
+              </Layout.Grid>
+            </CustomAppearanceProvider>
+          </Layout.Col>
+        </Layout>
+        <TogglePreview
+          isPreviewOpened={isPreviewOpened}
+          setPreviewOpen={setPreviewOpen}
+        />
+      </ProfileProvider>
+    </Page>
   );
 };
 
