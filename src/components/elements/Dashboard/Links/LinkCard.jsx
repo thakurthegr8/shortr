@@ -8,17 +8,33 @@ import Switch from "@/src/components/utils/General/Switch";
 import { useEffect, useState } from "react";
 import { DOMAIN } from "@/src/constants";
 import { toast } from "react-toastify";
+import Modal from "@/src/components/utils/Modal";
+import Typography from "@/src/components/utils/Typography";
 
 const RemoveLink = () => {
   const link = useLink();
   const currentLink = useCurrentLink();
-  const handleClick = () => {
-    link.removeLink.dispatch({ _id: currentLink.link._id });
-    console.log(currentLink._id);
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const deleteLinkHandler = async () => {
+    await link.removeLink.dispatch({ _id: currentLink.link._id }).then(payload => toggleModal());
   };
+  const toggleModal = () => {
+    setModalVisibility(prev => !prev);
+  }
   return (
-    <Button className="btn-icon" onClick={handleClick}>
+    <Button className="btn-icon" onClick={toggleModal}>
       <TrashIcon className="w-5 h-5" />
+      <Modal open={modalVisibility} onClose={toggleModal}>
+        <Layout.Col className="w-screen md:w-[36vw]">
+          <Layout.Col className="px-2 py-8 justify-center items-center">
+            <Typography.Body>Are you sure to delete this link?</Typography.Body>
+          </Layout.Col>
+          <Layout.Row className="p-2 justify-end gap-2">
+            <Button className="btn-primary" onClick={deleteLinkHandler} loading={link.removeLink.loading}>Confirm</Button>
+            <Button className="btn-secondary" onClick={toggleModal} disabled={link.removeLink.loading}>Cancel</Button>
+          </Layout.Row>
+        </Layout.Col>
+      </Modal>
     </Button>
   );
 };
@@ -60,7 +76,7 @@ const LinkCard = () => {
             />
           </Layout.Col>
         </Layout.Col>
-        <Layout.Row className="justify-end items-center">
+        <Layout.Row className="justify-end items-center gap-1">
           <Button className="btn-icon" onClick={copyToClipboard}>
             <ArrowUpOnSquareIcon className="w-5 h-5" />
           </Button>

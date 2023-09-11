@@ -65,7 +65,7 @@ export const getServerSideProps = withUrl(
   dbPage(async (ctx) => {
     ctx.res.setHeader(
       'Cache-Control',
-      'public, s-maxage=3600, stale-while-revalidate=59'
+      'public, s-maxage=60, stale-while-revalidate=59'
     )
     try {
       const profile = await Profile.findOne({
