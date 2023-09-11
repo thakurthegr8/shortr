@@ -65,7 +65,7 @@ const ReferenceLandingMain = () => {
           />
         )}
         <Typography.Subtitle>@{data.profile.username}</Typography.Subtitle>
-        <Typography.Body>{data.profile.bio}</Typography.Body>
+        <Typography.Body className="text-center">{data.profile.bio}</Typography.Body>
       </Layout>
       <Layout.Col className="items-center w-full gap-4">
         {data.links.map((item, index) => (
