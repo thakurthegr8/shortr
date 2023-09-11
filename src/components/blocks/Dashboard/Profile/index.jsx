@@ -117,6 +117,7 @@ const DashboardLandingPageProfile = () => {
                 className="btn-outlined-secondary dark:text-white btn-lg tracking-tight w-full py-3 rounded-full"
                 onClick={() => auth.removeProfileImage.dispatch(null)}
                 disabled={!auth?.data?.image || auth.removeProfileImage.loading}
+                loading={!auth?.data?.image || auth.removeProfileImage.loading}
               >
                 Remove
               </Button>
@@ -135,8 +136,9 @@ const DashboardLandingPageProfile = () => {
             />
             <Layout.Row className="justify-end">
               <Button
-                className="btn-primary btn-lg"
+                className="btn-primary"
                 disabled={postProfile.loading}
+                loading={postProfile.loading}
               >
                 Submit
               </Button>

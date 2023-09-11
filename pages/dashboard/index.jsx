@@ -15,6 +15,7 @@ import Profile from "@/src/services/db/models/Profile";
 import { Suspense } from "react";
 import Page from "@/src/components/pages";
 import { LOGOTEXT } from "@/src/constants";
+import { BeatLoader } from "react-spinners";
 
 const DashboardEditLandingPage = dynamic(
   () =>
@@ -57,7 +58,7 @@ const Dashboard = (props) => {
             >
               <Layout.Grid className="grid-cols-1 lg:grid-cols-4 divide-x dark:divide-dark_secondary h-full">
                 <Layout.Col className="col-span-2 py-36 lg:py-24">
-                  <Suspense fallback={<>loading</>}>
+                  <Suspense fallback={<BeatLoader color={"#fff"}/>}>
                     <DashboardEditLandingPage />
                   </Suspense>
                 </Layout.Col>
